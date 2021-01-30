@@ -1,0 +1,34 @@
+﻿@using ModelChecker.WEB.Models;
+@using ModelChecker.WEB.Util;
+
+@model CheckViewModel
+
+@{
+    string csscell = " p-2 border-right border-light text-center ";
+    int all = ViewBag.AllQnt;
+}
+
+
+    <div class="d-flex flex-row border-bottom p-0">
+        <div class="fix-w-40 @csscell ml-1">
+            @_Controls.CustomCheckBox(Model.Id, false, "checks", "DeleteForm", "ChangeChackAll('checlslist', 'checks0');")
+        </div>
+        <div class="col-3 p-2">
+            <h6 class=" m-0">@Html.DisplayFor(x => x.Name)</h6>
+        </div>
+        <button class="fix-w-40 rounded-0 btn p-2 btn-light " type="submit" form="@($"EditCheckForm{Model.Id}")"
+                data-toggle="modal" data-target="#rightModal">
+            ...
+        </button>
+        @_Controls.QntCellRed(Html.DisplayFor(x => x.AtWorkClashesQnt), @PageHelper.GetPercDec(Model.AtWorkClashesQnt, all), "font-weight-bold", "border-right border-left border-secondary-light")
+        @_Controls.QntCellRed(Html.DisplayFor(x => x.CreatedQnt), Model.CreatedQntPercDec)
+        @_Controls.QntCellRed(Html.DisplayFor(x => x.ActiveQnt), Model.ActiveQntPercDec)
+        @_Controls.QntCellGreen(Html.DisplayFor(x => x.AnalizedQnt), Model.AnalizedQntPercDec)
+        @_Controls.QntCellGreen(Html.DisplayFor(x => x.ConfirmedQnt), Model.ConfirmedQntPercDec)
+        @_Controls.QntCellGreen(Html.DisplayFor(x => x.CorrectedQnt), Model.CorrectedQntPercDec)
+       
+        <div class="@csscell col  text-break" style="font-size:10pt;text-align:center!important;">
+            @Html.DisplayFor(x => x.Date)
+        </div>
+    </div>
+

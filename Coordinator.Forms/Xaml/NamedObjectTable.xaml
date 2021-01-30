@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Coordinator.Forms.Xaml.NamedObjectTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Coordinator.Forms.Xaml"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/WpfStyles;component/Core.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <Grid>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+		<TextBox Grid.Row="0" Style="{StaticResource TextBoxA}" KeyUp="TextBox_KeyUp"></TextBox>
+		<DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ObjectItems, UpdateSourceTrigger=PropertyChanged }"
+				  Name="Table">
+			<DataGrid.Columns>
+				<DataGridTemplateColumn Width="auto">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<CheckBox IsChecked="{Binding Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  HorizontalAlignment="Center"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+					<DataGridTemplateColumn.HeaderTemplate>
+						<DataTemplate>
+							<CheckBox IsChecked="{Binding CheckAll, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.HeaderTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn Binding="{Binding Name}" IsReadOnly="True" Width="*"  CellStyle="{StaticResource CellB}" >
+					
+					<DataGridTextColumn.HeaderTemplate>
+						<DataTemplate>
+							<TextBlock Text="Наименование объекта" VerticalAlignment="Center"/>
+						</DataTemplate>
+					</DataGridTextColumn.HeaderTemplate>
+				</DataGridTextColumn>
+				
+				<!---->
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>

@@ -1,0 +1,34 @@
+﻿
+@using ModelChecker.WEB.Models;
+
+@model PageMenuViewModel
+
+@{
+    MenuItem activeItem = (MenuItem)TempData["ActiveItem"];
+}
+
+<style>
+    .nav-active,  .nav-link:hover{
+            border-bottom:solid 2px #1abc9c!important;
+                color: #1abc9c!important;
+        }
+
+    .nav-link{
+         transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        color:#2E4154!important;
+    }
+
+
+</style>
+
+
+@foreach (var item in Model.Items)
+{
+    bool isactive = item.MenuItem == activeItem;
+    string _act = isactive ? "nav-active" : "";
+    <li>@Html.ActionLink(item.Title, item.ActionName, item.ControllerName, null, new { @class = $"nav-link min-w-120 text-center {_act}" })</li>
+
+
+}

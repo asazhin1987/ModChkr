@@ -1,0 +1,192 @@
+﻿@using ModelChecker.WEB.Models;
+@model ChartViewModel
+
+
+<style>
+    #chartBtn {
+        border-bottom: solid 1px #1abc9c !important;
+        color: #1abc9c !important;
+    }
+
+    .status-span {
+        margin-top: 18px;
+        margin-bottom: 18px;
+        width: 80%;
+        margin-right: 10%;
+        margin-left: 10%;
+        height: 4px;
+        border-radius: 1px;
+        display: inline-block;
+    }
+
+    .myrow {
+        cursor: pointer;
+        margin: 0 !important;
+        padding:0!important;
+        background-color: #f8f9fa;
+        color: #6c757d;
+        border-bottom: solid 1px #f8f9fa;
+        opacity:0.4;
+    }
+
+        .myrow:hover {
+            font-weight: 600 !important;
+        }
+
+    .mycheck:checked ~ .myrow {
+        background-color: white !important;
+        color: #2E4154 !important;
+        opacity:1!important;
+    }
+
+    
+</style>
+
+<script>
+    function CheckAllRefresh(e, block) {
+        CheckAll(e, block);
+        if (e.checked == true) {
+           UpdateCharts();
+        }
+    
+    }
+    function UpdateCharts() {
+        SubmitForm('UpdateDiagramForm');
+        SubmitForm('UpdatePipeForm');
+    }
+
+    function CheckBoxesSync(e, _id) {
+        CheckBoxSync(e, 'diagram_' + _id );
+        CheckBoxSync(e, 'pipe_' + _id);
+        CheckBoxSync(e, 'style_' + _id);
+        UpdateCharts();
+    }
+
+    function CheckBoxSync(e, id) {
+        var _cb = document.getElementById(id);
+        if (_cb != null) {
+            _cb.checked = e.checked;
+        }
+            
+    }
+</script>
+
+@if (Model.Checks == null)
+{
+    <div class="container-fluid m-3">
+        <h2 class="text-center">@Resources.Global.NullCollection</h2>
+    </div>
+}
+else
+{
+<section class="d-none">
+    @using (Ajax.BeginForm("DynamicCharts", null
+       , new AjaxOptions() { UpdateTargetId = "diagram", HttpMethod = "Get" }
+       , new { Id = $"UpdateDiagramForm" }))
+    {
+        <button class="d-none" type="submit"></button>
+        @Html.HiddenFor(x => x.SDate)
+        @Html.HiddenFor(x => x.EDate)
+    }
+
+    @using (Ajax.BeginForm("StatusPipe", null
+      , new AjaxOptions() { UpdateTargetId = "pipe", HttpMethod = "Get" }
+      , new { Id = $"UpdatePipeForm" }))
+    {
+        <button class="d-none" type="submit"></button>
+        @Html.HiddenFor(x => x.EDate)
+    }
+
+</section>
+<div class="d-flex flex-column ">
+    <div class="" id="diagram" style="height:300px;">
+        @Html.Partial("_Chart", Model.Slices)
+    </div>
+   
+
+
+    <div class=" d-flex bg-white  flex-row ">
+        <div class="col overflow-y-auto" style="height:450px;">
+            <div class="d-flex flex-row bg-white border-bottom p-0 position-sticky" style="height:40px;top:0;z-index:10;">
+                <div class="fix-w-40 pt-1 ">
+                    @_Controls.CustomCheckBox(0, Model.Checks.Count() == Model.SelectedChecks.Count(), "checks", "", "CheckAllRefresh(this, 'checlslist');")
+                </div>
+                <div class="d-flex flex-row col p-0 ">
+                    <div class="col-4 pt-2 pl-0 text-left text-secondary " style="font-size:10pt;">
+                        @Resources.Global.CheckName
+
+                    </div>
+                    <div class="col-2 pt-2 text-center text-secondary" style="font-size:10pt;">
+                        @Resources.Global.Clashes
+                    </div>
+                    <div class="col">
+                        <span class="status-span status-new"></span>
+                    </div>
+                    <div class="col">
+                        <span class="status-span status-active"></span>
+                    </div>
+                    <div class="col">
+                        <span class="status-span status-analize"></span>
+                    </div>
+                    <div class="col">
+                        <span class="status-span status-confirm"></span>
+                    </div>
+                    <div class="col">
+                        <span class="status-span status-corrected"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div id="checlslist">
+                @foreach (var check in Model.Checks.AsParallel().AsOrdered())
+                {
+                    bool _ischecked = Model.SelectedChecks.Contains(check.Id);
+                    <div class="p-0 d-flex flex-row">
+                        <input class="mycheck d-none " type="checkbox" checked="checked" id="style_@check.Id" />
+                        <input class="d-none  " type="checkbox" checked="checked" id="diagram_@check.Id" form="UpdateDiagramForm" value="@check.Id" name="SelectedChecks" />
+                        <input class="d-none " type="checkbox" checked="checked" id="pipe_@check.Id" form="UpdatePipeForm" value="@check.Id" name="SelectedChecks" />
+
+                        <div class="custom-control custom-checkbox fix-w-40 ">
+                            <input type="checkbox" class="custom-control-input"
+                                   id="cb_@check.Id" name="SelectedChecks" onchange="CheckBoxesSync(this, '@check.Id');ChangeChackAll('checlslist', 'checks0');" value="@check.Id"
+                                   form="UpdateForm" @(_ischecked ? "checked='checked'" : string.Empty)>
+                            <label class="custom-control-label" for="cb_@check.Id"></label>
+                        </div>
+                        <label class="d-flex flex-row myrow col" for="cb_@check.Id">
+                            <span class="col-4 p-0 bg-white">
+                                @check.Name
+                            </span>
+                            <span class="col-2 bg-light text-right p-0 border-light border-right ">
+                                @_Controls.QntCell(check.StartPeriodClashesQnt, check.EndPeriodClashesQnt, _ischecked, check.StartPeriodClashesQnt < check.EndPeriodClashesQnt)
+                            </span>
+                            <span class="col bg-light text-right p-0 border-light border-right">
+                                @_Controls.QntCell(check.StartPeriodCreatedQnt, check.EndPeriodCreatedQnt, _ischecked, check.StartPeriodCreatedQnt < check.EndPeriodCreatedQnt)
+                            </span>
+                            <span class="col bg-light text-right p-0 border-light border-right">
+                                @_Controls.QntCell(check.StartPeriodActiveQnt, check.EndPeriodActiveQnt, _ischecked, check.StartPeriodActiveQnt < check.EndPeriodActiveQnt)
+                            </span>
+                            <span class="col bg-light text-right p-0 border-light border-right">
+                                @_Controls.QntCell(check.StartPeriodAnalizedQnt, check.EndPeriodAnalizedQnt, _ischecked, check.StartPeriodAnalizedQnt > check.EndPeriodAnalizedQnt)
+                            </span>
+                            <span class="col bg-light  text-right p-0 border-light border-right">
+                                @_Controls.QntCell(check.StartPeriodConfirmedQnt, check.EndPeriodConfirmedQnt, _ischecked, check.StartPeriodConfirmedQnt > check.EndPeriodConfirmedQnt)
+                            </span>
+                            <span class="col bg-light  text-right p-0 border-light border-right">
+                                @_Controls.QntCell(check.StartPeriodCorrectedQnt, check.EndPeriodCorrectedQnt, _ischecked, check.StartPeriodCorrectedQnt > check.EndPeriodCorrectedQnt)
+                            </span>
+                        </label>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+        <div class="" style="min-width:300px;min-height:300px;" id="pipe">
+            @Html.Partial("_Pipe", Model)
+        </div>
+    </div>
+</div>
+
+
+}
+

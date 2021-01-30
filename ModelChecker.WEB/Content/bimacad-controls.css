@@ -1,0 +1,95 @@
+﻿
+.table-row:hover {
+    background-color: #f8f9fa !important;
+}
+
+
+.p-description {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 8pt;
+}
+
+.search {
+    /*border: solid 1px rgb(0,171,170);*/
+    padding-left: 40px !important;
+    min-width: 200px;
+    background: url(Images/search-16.png) no-repeat 12px 12px white;
+}
+.update-btn, .remove-btn, .filter-btn, .excel-btn {
+    height: 40px;
+    width: 40px;
+    border-radius: 0 !important;
+}
+
+.update-btn {
+    background: url(Images/sinchronize-16.png) no-repeat 12px 12px white;
+}
+
+.remove-btn {
+    background: url(Images/delete-16.png) no-repeat 12px 7px white;
+}
+
+
+.filter-btn {
+    background: url(Images/filled-filter-16.png) no-repeat 12px 12px white;
+}
+
+
+.excel-btn {
+    background: url(Images/excel-16.png) no-repeat 12px 12px white;
+}
+
+.status-new {
+    background-color: #dc3545!important;
+}
+
+.status-active {
+    background-color: #ffc107 !important;
+}
+
+
+.status-analize {
+    background-color: #007bff !important;
+}
+
+
+.status-confirm {
+    background-color: #34495E !important;
+}
+
+.status-corrected {
+    background-color: #1abc9c !important;
+}
+
+
+.arrow {
+    transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+}
+
+.rotate-90 {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+}
+
+
+.red-50 {
+    background-color: #e56773;
+}
+
+.green-50 {
+    background-color: #40e5c4;
+}

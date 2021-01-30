@@ -1,0 +1,47 @@
+﻿@using ModelChecker.WEB.Models;
+@model ChecksPageViewModel
+
+@{
+    ViewBag.Title = Resources.Menu.Checks;
+}
+<section class="d-none">
+    @using (Ajax.BeginForm("CheckList", null
+             , new AjaxOptions() { UpdateTargetId = "result", HttpMethod = "Get", LoadingElementId = "loading" }
+             , new { Id = $"UpdateForm" }))
+    {<button type="submit" class="d-none"></button>}
+
+    @using (Ajax.BeginForm("DeleteChecks", null
+          , new AjaxOptions()
+          {
+              UpdateTargetId = "smalldialog",
+              HttpMethod = "Post",
+              LoadingElementId = "loading",
+              Confirm = Resources.Global.RemoveConfirmMsg,
+              OnComplete = "ShowModalSmall();UpdateResult();"
+          }
+            , new { Id = $"DeleteForm" })) { }
+</section>
+
+
+<div class="d-flex flex-row">
+
+    <div class="col d-flex flex-column pt-1">
+        <div class="d-flex flex-row">
+            <button class="btn btn-light remove-btn mr-1" type="submit" form="DeleteForm" style="background-position-y:12px!important;"></button>
+            <a class="btn btn-light excel-btn" href="ExcelReport/@Model.Construction.Id" ></a>
+            <div class="col">
+
+            </div>
+            <button class="btn btn-light update-btn mr-1" type="submit" form="UpdateForm"></button>
+            <button class="btn btn-light filter-btn" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
+            </button>
+        </div>
+        <div id="result">
+            @Html.Partial("_ChecksList", Model.Checks)
+        </div>
+    </div>
+    <div class="collapse show bg-light position-sticky vh-100-50 pl-2 pr-2" id="filterContainer"
+         style="top:50px;z-index:9!important;width:250px;">
+        @Html.Action("ConstructionsFilter", "Report", new { Model.Construction.Id })
+    </div>
+</div>

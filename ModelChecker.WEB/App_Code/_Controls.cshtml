@@ -1,0 +1,137 @@
+﻿@using ModelChecker.WEB.Models;
+@using ModelChecker.DTO.Interfaces;
+@using System.Web.Mvc.Html;
+
+@helper SaveCancelButtons(string formname = "SubmitForm")
+{
+    <div class="col d-flex flex-row bg-white">
+        <button type="button" class="btn btn-light col-6 rounded-0" data-dismiss="modal">@Resources.Global.Cancel</button>
+        <button type="submit" class="btn btn-secondary  col-6 rounded-0" form="@formname">@Resources.Global.Save</button>
+    </div>
+}
+
+@helper FlatRadio(INamedObject item, bool _checked, string name = "SI",
+    string formname = "UpdateForm", string onchange = "UpdateResult()")
+{
+    <style>
+        .mydiv {
+            border-left: solid 4px white;
+        }
+
+            .mydiv:hover {
+                background-color: #f8f9fa !important;
+                border-left: solid 4px #f8f9fa;
+            }
+
+        .myflatcb:checked ~ .mydiv {
+            border-left: solid 4px #1abc9c !important;
+            color: #1abc9c !important;
+        }
+    </style>
+
+    <div class="d-flex flex-row bg-white m-0 p-0" style="min-height:50px;">
+        <input type="radio" name="@name" value="@item.Id" id="@($"{name}{item.Id}")" form="@formname"
+               class="d-none myflatcb" onchange="@onchange" @(_checked ? "checked='checked'" : string.Empty) />
+        <label class="col mydiv border-bottom p-2 m-0" for="@($"{name}{item.Id}")" style="cursor:pointer!important;">
+            @item.Name
+        </label>
+    </div>
+}
+
+
+@helper CustomCheckBox(int Id, bool _checked, string name = "SI",
+    string formname = "UpdateForm", string onchange = "UpdateResult()", string text = "", string cssclass = "")
+{
+
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input @cssclass"
+               id="@($"{name}{Id}")" name="@name" onchange="@onchange" value="@Id"
+               form="@formname"
+               @(_checked ? "checked='checked'" : string.Empty)>
+        <label class="custom-control-label" for="@($"{name}{Id}")">@text</label>
+    </div>
+}
+
+
+
+
+@helper QntCell(int startPer, int endPer, bool ch, bool isred)
+{
+
+    string css = isred ? "red-50" : "green-50";
+    if (startPer == endPer)
+    {
+        css = "bg-light text-secondary";
+    }
+    <p class="m-0 pt-1 pb-1 text-center @css" style="font-size:9pt!important">
+        @startPer - @endPer
+        <b class="qnt-arrow">
+            @if (startPer > endPer)
+            {
+                @: &darr;
+            }
+            else if (endPer > startPer)
+            {
+                @: &uarr;
+            }
+            else
+            {
+                @: -
+            }
+        </b>
+    </p>
+}
+
+
+@helper ArrowRadio(int Id, string name, string form, string caption, bool ischecked)
+{
+    <label for="@name @Id" class="m-0 p-0 d-flex flex-row w-100 justify-content-center" style="cursor:pointer;">
+        <input type="radio" name="@name" class="arrow-cb d-none" id="@name @Id" onchange="GetReport('@form')" form="@form" value="@Id"
+               @(ischecked ? "checked ='checked'" : string.Empty)>
+
+        <span class="text-center col-auto m-0 p-0">
+            @caption
+        </span>
+        <span class="checkbox-cb m-0 "></span>
+
+
+    </label>
+}
+
+@helper HeadCell(string text, string name, Orders orders, Orders activeOrders, string col = "col", string align = "text-left", string border = "border-right border-light")
+{
+    string id = $"arrow{name}";
+    bool _checked = activeOrders == orders;
+
+    <div class="@col p-2 @border">
+        <input type="radio" class="d-none my-cb" id="@id" name="orders" @(_checked ? "checked ='checked'" : string.Empty) value="@orders" onchange="UpdateResult()" form="UpdateForm" />
+        <label for="@id" class=" text-break @align position-relative d-block pl-3 " style="cursor:pointer;">
+            @text
+            <b class="position-absolute my-arrow text-light-green " style="left:0;top:0;font-size:14pt;margin-top:-4px;">&darr;</b>
+        </label>
+    </div>
+}
+
+@helper QntCellRed(HtmlString sqnt, decimal perc, string bold = "", string border = "border-right border-light")
+{
+    @QntCell( sqnt, perc, "229, 103, 115", bold, border )
+}
+
+@helper QntCellGreen(HtmlString sqnt, decimal perc, string bold = "", string border = "border-right border-light")
+{
+    @QntCell( sqnt, perc, "64, 229, 196", bold, border )
+}
+
+@helper QntCell(HtmlString sqnt, decimal perc, string rgb, string bold = "", string border = "border-right border-light")
+{
+//perc = perc > 0 && perc < 0.1m ? 0.1m : perc;
+var _perc = @Math.Round(perc, 1).ToString().Replace(",", ".");
+string bg = perc == 0 ? "#f8f9fa; color:rgb(224,224,224);" : $"rgba({rgb}, {_perc});";
+
+    <div class="p-2 @border col  text-break @bold">
+        <p class="p-0 text-center m-0" style="background-color:@bg">
+            @sqnt
+        </p>
+
+    </div>
+}

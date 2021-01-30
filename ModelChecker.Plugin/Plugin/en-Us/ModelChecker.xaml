@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RibbonControl  
+	x:Uid="ModelChecker" xmlns="clr-namespace:Autodesk.Windows;assembly=AdWindows"
+    	xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    	xmlns:adwi="clr-namespace:Autodesk.Internal.Windows;assembly=AdWindows"
+    	xmlns:system="clr-namespace:System;assembly=mscorlib"
+    	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+       	xmlns:local="clr-namespace:Autodesk.Navisworks.Gui.Roamer.AIRLook;assembly=navisworks.gui.roamer">
+
+    	<RibbonTab Id="ID_ModelCheckerTab" KeyTip="T1">
+        	<RibbonPanel x:Uid="UID_ModelCheckerPanel">
+            		<RibbonPanelSource x:Uid="UID_ModelCheckerTabPanelSource" KeyTip="C1" Title="Model Checker">
+                 		<local:NWRibbonButton x:Uid="ShowMasterBtn" Id="Id_ShowMasterBtn"
+                                    	Size="Large"
+                                    	KeyTip="B1"
+                                    	ShowText="True"
+					Text = "Model Checker"
+                                    	Orientation = "Vertical"/>
+				<local:NWRibbonButton x:Uid="SettingBtn" Id="Id_SettingBtn"
+                                    	Size="Large"
+                                    	KeyTip="B1"
+                                    	ShowText="True"
+					Text = "Settings"
+                                    	Orientation = "Vertical"/>
+            		</RibbonPanelSource>
+        	</RibbonPanel>
+	</RibbonTab>
+</RibbonControl>

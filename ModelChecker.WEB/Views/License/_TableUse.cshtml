@@ -1,0 +1,78 @@
+﻿@using ModelChecker.DTO;
+
+
+@model IEnumerable<LicenseUsingDTO>
+
+
+    <section class="d-none">
+        @using (Ajax.BeginForm("DeleteLicenses", null
+              , new AjaxOptions()
+              {
+                  UpdateTargetId = "results",
+                  HttpMethod = "Post",
+                  LoadingElementId = "loading",
+                  Confirm = $"{Resources.Global.WithdrawLicense} ?",
+              }
+                , new { Id = $"DeleteForm" })) { }
+    </section>
+
+    <button class="btn btn-danger rounded-0" type="submit" form="DeleteForm" id="delbtn" >
+        @Resources.Global.WithdrawLicense
+    </button>
+    <div class="d-flex flex-row table-header">
+        <div class="fix-w-40 p-2 ">
+            @_Controls.CustomCheckBox(0, false, "lics", "", "CheckAll(this, 'liclist');SetDisabled('liclist', 'delbtn');")
+        </div>
+
+        <div class="col-3 p-2 ">
+            @Resources.Global.PCName
+        </div>
+        <div class="col-3 p-2">
+            @Resources.Global.UserName
+        </div>
+        <div class="col-2 p-2">
+            @Resources.Global.LastActivites
+        </div>
+        <div class="col p-2">
+            @Resources.Global.Last3MonthsUniqQnt
+        </div>
+        <div class="col p-2">
+            @Resources.Global.Last3MonthsQnt
+        </div>
+    </div>
+
+    <div id="liclist">
+        @foreach (var item in Model.AsParallel().AsOrdered())
+        {
+
+            <div class="d-flex flex-row bg-white border-bottom border-light p-0 " style="font-size:10pt;">
+                <div class="fix-w-40 text-center p-2">
+                    @_Controls.CustomCheckBox(item.Id, false, "lics", "DeleteForm", "ChangeChackAll('liclist', 'lics0');SetDisabled('liclist', 'delbtn');")
+                </div>
+                <div class="col-3 p-2 ">
+                    @item.StantionName
+                </div>
+                <div class="col-3 p-2">
+                    @item.UserName
+                </div>
+                <div class="col-2 p-2">
+                    @item.LastAccess
+                </div>
+                <div class="col p-2">
+                    @item.LastUniqUsingQnt
+                </div>
+                <div class="col p-2">
+                    @item.LastAllUsingQnt
+                </div>
+            </div>
+        }
+
+    </div>
+
+
+    <script>
+        $("document").ready(function () {
+            SetDisabled('liclist', 'delbtn');
+        });
+
+    </script>

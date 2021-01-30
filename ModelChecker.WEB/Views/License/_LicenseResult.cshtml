@@ -1,0 +1,45 @@
+﻿@using ModelChecker.WEB.Models;
+
+@model LicenseViewModel
+
+
+
+@*<style>
+    .my-table {
+        height: calc(100vh - 150px);
+    }
+</style>*@
+
+
+
+@using (Ajax.BeginForm("EditLicense", null
+            , new AjaxOptions() { UpdateTargetId = "rightdialog", HttpMethod = "Get", LoadingElementId = "loading" }
+            , new { Id = $"EditForm" })){}
+
+    @if (Model.Success)
+    {
+        <h5 class="col text-primary-green pt-2">
+            @Html.DisplayFor(x => x.Message)
+        </h5>
+        <button class="col-auto btn btn-secondary rounded-0 " form="EditForm"   data-toggle="modal" data-target="#rightModal">
+            @Resources.Global.EditLicenseKey
+        </button>
+    }
+    else
+    {
+        <style>
+            #diagramcontainer, #tablecontainer{
+                opacity:0.1!important;
+            }
+        </style>
+
+        <h5 class="col text-danger pt-2">
+            @Html.DisplayFor(x => x.Message)
+        </h5>
+        <button class="col-auto btn btn-secondary rounded-0" form="EditForm"   data-toggle="modal" data-target="#rightModal">
+            @Resources.Global.EditLicenseKey
+        </button>
+    }
+
+
+

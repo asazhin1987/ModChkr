@@ -1,0 +1,64 @@
+﻿@using ModelChecker.WEB.Models;
+@model StatusReportViewModel
+
+@if (Model.ClashesQnt > 0)
+{
+    <script>
+     function CreatePie() {
+     var piedata = [
+            {
+                "source": "@Resources.Global.StatusCreate",
+                "percentage": @Model.CreatedQntPerc
+
+            },
+            {
+                "source":  "@Resources.Global.StatusActive",
+                "percentage":  @Model.ActiveQntPerc
+            },
+            {
+                "source":  "@Resources.Global.StatusAnalized",
+                "percentage":  @Model.AnalizedQntPerc
+            },
+            {
+                "source": "@Resources.Global.StatusConfirmed",
+                "percentage":  @Model.ConfirmedQntPerc
+            },
+            {
+                "source":  "@Resources.Global.StatusCorrected",
+                "percentage":  @Model.CorrectedQntPerc,
+                "explode": true
+            }
+        ];
+        $("#pipe").kendoChart({
+
+                legend: {
+                    position: "bottom"
+                },
+                dataSource: {
+                    data: piedata
+                },
+                series: [{
+                    type: "pie",
+                    field: "percentage",
+                    categoryField: "source",
+                    explodeField: "explode"
+                }],
+                seriesColors: ["#dc3545", "#ffc107", "#007bff", "#34495E", "#1abc9c"],
+                tooltip: {
+                    visible: true,
+                    template: "${ category } - ${ value }%"
+                }
+        });
+
+    }
+
+         $(document).ready(function () {
+            CreatePie();
+    });
+    </script>
+
+
+}
+
+
+

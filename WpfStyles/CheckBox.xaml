@@ -1,0 +1,320 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfStyles">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Brushes.xaml"/>
+        <ResourceDictionary Source="Fonts.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <ControlTemplate x:Key="CustomCheckBoxControlTemplate" TargetType="{x:Type CheckBox}">
+        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CheckStates">
+                    <VisualState x:Name="Checked">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="optionMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.9">
+                            </DoubleAnimation>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="indeterminateMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unchecked"/>
+                    <VisualState x:Name="Indeterminate">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="optionMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0">
+                            </DoubleAnimation>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="indeterminateMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.9">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="optionMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="1">
+                            </DoubleAnimation>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="indeterminateMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ThicknessAnimation Duration="0:0:0.1" Storyboard.TargetName="checkBoxBorder"
+                                                 Storyboard.TargetProperty="BorderThickness"
+                                                 To="1.5px">
+                            </ThicknessAnimation>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0" Storyboard.TargetName="checkBoxBorder" Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Opacity)" To="0.2" />
+                            <DoubleAnimation Duration="0:0:0" Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Opacity)" To="0.2" />
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="optionMark" Storyboard.TargetProperty="Opacity" To="0" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Normal"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="checkBoxBorder" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="1px" 
+                    Background="White" 
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                    Margin="0" 
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    CornerRadius="3"
+                    Width="16"
+                    Height="16">
+                <Grid x:Name="markGrid">
+                    <Path x:Name="optionMark" 
+                          Data="M 7.16556291 12 2 7.18518519 3.66887417 5.62962963 7.16556291 8.81481481 12.3311258 4 14 5.55555556 z" 
+                          Fill="{DynamicResource GreenText}" 
+                          Margin="1" 
+                          Opacity="0.15" 
+                          Stretch="Uniform"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          />
+                    <Rectangle x:Name="indeterminateMark" 
+                               Fill="{DynamicResource GreenText}"
+                               Margin="2"
+                               Opacity="0"/>
+                </Grid>
+            </Border>
+            <ContentPresenter x:Name="contentPresenter" 
+                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                              Content="{TemplateBinding Content}" 
+                              Grid.Column="1" 
+                              ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                              Focusable="False" 
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                              Margin="8,1,0,0" 
+                              RecognizesAccessKey="True" 
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!--<Trigger Property="HasContent" Value="True">
+                <Setter Property="FocusVisualStyle">
+                    <Setter.Value>
+                        <Style>
+                            <Setter Property="Control.Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Rectangle Margin="14,0,0,0" 
+                                                   SnapsToDevicePixels="True" 
+                                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                                                   StrokeThickness="1" 
+                                                   StrokeDashArray="1 2"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Padding" Value="4,-1,0,0"/>
+            </Trigger>-->
+            <!--<Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" TargetName="checkBoxBorder" Value="{DynamicResource MouseOnBackgroundBrush}"/>
+                -->
+            <!--<Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FF5593FF"/>-->
+            <!--
+                <Setter Property="Fill" TargetName="optionMark" Value="{DynamicResource ForegroundBrush}"/>
+                <Setter Property="Fill" TargetName="indeterminateMark" Value="{DynamicResource ForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" TargetName="checkBoxBorder" Value="{DynamicResource DisabledBackgroundBrush}"/>
+                -->
+            <!--<Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FFBCBCBC"/>-->
+            <!--
+                <Setter Property="Fill" TargetName="optionMark" Value="{DynamicResource DisabledForegroundBrush}"/>
+                <Setter Property="Fill" TargetName="indeterminateMark" Value="{DynamicResource DisabledForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="checkBoxBorder" Value="{DynamicResource BackgroundThemePressedBrush}"/>
+                -->
+            <!--<Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FF3C77DD"/>-->
+            <!--
+                <Setter Property="Fill" TargetName="optionMark" Value="{DynamicResource ForegroundBrush}"/>
+                <Setter Property="Fill" TargetName="indeterminateMark" Value="{DynamicResource ForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
+                <Setter Property="Opacity" TargetName="indeterminateMark" Value="0"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="{x:Null}">
+                <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
+                <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
+            </Trigger>-->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="CustomCheckBoxControlTemplate2" TargetType="{x:Type CheckBox}">
+        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1"/>
+            </Grid.RowDefinitions>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CheckStates">
+                    <VisualState x:Name="Checked">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="optionMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.9">
+                            </DoubleAnimation>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="indeterminateMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0">
+                            </DoubleAnimation>
+                            <ColorAnimation Duration="0:0:0" Storyboard.TargetName="checkBoxBorder" 
+                                             Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)" To="{StaticResource TextGreenColor}" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unchecked"/>
+                    <VisualState x:Name="Indeterminate">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="optionMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0">
+                            </DoubleAnimation>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="indeterminateMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.9">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="optionMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="1">
+                            </DoubleAnimation>
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="indeterminateMark"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ThicknessAnimation Duration="0:0:0.1" Storyboard.TargetName="checkBoxBorder"
+                                                 Storyboard.TargetProperty="BorderThickness"
+                                                 To="0.5px">
+                            </ThicknessAnimation>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <!--<Storyboard>
+                            <DoubleAnimation Duration="0:0:0" Storyboard.TargetName="checkBoxBorder" 
+                                             Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Opacity)" To="0.2" />
+                            <DoubleAnimation Duration="0:0:0" Storyboard.TargetName="contentPresenter"
+                                             Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Opacity)" To="0.2" />
+                            <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="optionMark" 
+                                             Storyboard.TargetProperty="Opacity" To="0" />
+                        </Storyboard>-->
+                    </VisualState>
+                    <VisualState x:Name="Normal"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="checkBoxBorder" 
+                    BorderBrush="Transparent" 
+                    BorderThickness="1px" 
+                    Background="Transparent" 
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                    Margin="2" 
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    CornerRadius="3"
+                    Width="16"
+                    Height="16"
+                    Grid.Column="1" >
+                <Grid x:Name="markGrid">
+                    <Path x:Name="optionMark" 
+                          Data="M 7.16556291 12 2 7.18518519 3.66887417 5.62962963 7.16556291 8.81481481 12.3311258 4 14 5.55555556 z" 
+                          Fill="{DynamicResource GreenText}" 
+                          Margin="1" 
+                          Opacity="0" 
+                          Stretch="Uniform"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          />
+                    <Rectangle x:Name="indeterminateMark" 
+                               Fill="{DynamicResource GreenText}"
+                               Margin="2"
+                               Opacity="0"/>
+                </Grid>
+            </Border>
+            <ContentPresenter x:Name="contentPresenter" 
+                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                              Content="{TemplateBinding Content}" 
+                              Grid.Column="0" 
+                              ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                              Focusable="False" 
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                              Margin="10,5,10,5" 
+                              RecognizesAccessKey="True" 
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              TextBlock.Foreground="{StaticResource TextGray}"
+                              TextBlock.FontWeight="{TemplateBinding FontWeight}"
+                              TextBlock.FontSize="{TemplateBinding FontSize}"
+                              TextBlock.FontFamily="{TemplateBinding FontFamily}"
+                              />
+            <Border BorderThickness="2" Grid.ColumnSpan="2" Grid.Row="1" BorderBrush="{StaticResource TextGrayFaded}"/>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="CheckBoxA" TargetType="{x:Type CheckBox}">
+        <Setter Property="BorderBrush" Value="{StaticResource GreenText}"/>
+        <Setter Property="Template" Value="{StaticResource CustomCheckBoxControlTemplate}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource GreenText}"/>
+        <Setter Property="IsThreeState" Value="False"/>
+    </Style>
+
+    <Style x:Key="CheckBoxB" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource CheckBoxA}">
+        <Setter Property="BorderBrush" Value="{StaticResource TextGrayFaded}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextGrayFaded}"/>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource GreenText}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CheckBoxC" TargetType="{x:Type CheckBox}">
+        <Setter Property="Template" Value="{StaticResource CustomCheckBoxControlTemplate2}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="IsThreeState" Value="False"/>
+        <Setter Property="BorderBrush" Value="{StaticResource GreenText}"/>
+        <Setter Property="Foreground" Value="{StaticResource GreenText}"/>
+        <!--<Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource GreenText}"/>
+            </Trigger>
+        </Style.Triggers>-->
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,95 @@
+﻿@using ModelChecker.WEB.Models;
+@model StatisticViewModel
+
+@{
+    ViewBag.Title = Resources.Menu.Statistic;
+}
+
+<style>
+    .my-btn {
+        width: 180px !important;
+        font-size: 10pt !important;
+        border-bottom: solid 1px #6c757d;
+        border-radius: 0;
+        margin-left: 4px;
+        height: 40px;
+    }
+
+        .my-btn:hover {
+            border-bottom: solid 1px #1abc9c !important;
+            color: #1abc9c !important;
+        }
+
+    .my-lbl {
+        font-size: 10pt !important;
+        margin: 0 !important;
+    }
+</style>
+
+<style>
+
+
+    .qnt-arrow {
+    }
+</style>
+
+<div class="d-flex flex-row">
+    @*<div class="position-sticky vh-100-50 pl-2 pr-2 overflow-y-auto bg-dark" id="checksContainer"
+             style="top:50px;z-index:9!important;width:250px;">
+
+        </div>*@
+    <div class="col d-flex flex-column pt-1">
+        <div class="d-flex flex-row position-sticky bg-white " style="height:50px;z-index:10;top:50px;">
+
+            <div class="col">
+
+            </div>
+            @using (Ajax.BeginForm("StatisticReport", null
+            , new AjaxOptions() { UpdateTargetId = "result", HttpMethod = "Get", LoadingElementId = "loading" }
+            , new { Id = $"UpdateForm" }))
+            {
+                <button class="d-none" type="submit"></button>
+
+                <input type="radio" name="ReportType" id="ReportInput_@ReportType.Charts" value="@ReportType.Charts" class="d-none" checked="checked" onchange="UpdateResult()" />
+                <label class="btn my-btn" for="ReportInput_@ReportType.Charts" id="chartBtn">@Resources.Global.Charts</label>
+
+                <input type="radio" name="ReportType" id="ReportInput_@ReportType.Compare" value="@ReportType.Compare" class="d-none" onchange="UpdateResult()" />
+                <label class="btn my-btn" for="ReportInput_@ReportType.Compare" id="compareBtn">@Resources.Global.Compare</label>
+
+                <input type="radio" name="ReportType" id="ReportInput_@ReportType.CategoryMatrix" value="@ReportType.CategoryMatrix" class="d-none" onchange="UpdateResult()" />
+                <label class="btn my-btn" for="ReportInput_@ReportType.CategoryMatrix" id="catMatrixBtn" >@Resources.Global.CategoryMatrix</label>
+
+                <input type="radio" name="ReportType" id="ReportInput_@ReportType.ModelMatrix" value="@ReportType.ModelMatrix" class="d-none" onchange="UpdateResult()" />
+                <label class="btn my-btn" for="ReportInput_@ReportType.ModelMatrix" id="modelMatrixBtn">@Resources.Global.ModelMatrix</label>
+
+            }
+            <button class="btn btn-light update-btn ml-1" type="submit" form="UpdateForm"></button>
+
+            @*<button class="btn btn-light filter-btn" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer"></button>*@
+        </div>
+        <div id="result" class="bg-light">
+
+        </div>
+    </div>
+    <div class="collapse show bg-light position-sticky vh-100-50 pl-2 pr-2 overflow-y-auto" id="filterContainer"
+         style="top:50px;z-index:9!important;width:250px;">
+        <div class="position-sticky bg-white p-2 " style="top:0;z-index:10;" id="datesfilter">
+            @Html.LabelFor(x => x.SDate, htmlAttributes: new { @class = "my-lbl" })
+            @Html.EditorFor(x => x.SDate, new { htmlAttributes = new { @class = "form-control", @form = "UpdateForm", @onchange = "UpdateResult()" } })
+
+            @Html.LabelFor(x => x.EDate, htmlAttributes: new { @class = "my-lbl" })
+            @Html.EditorFor(x => x.EDate, new { htmlAttributes = new { @class = "form-control", @form = "UpdateForm", @onchange = "UpdateResult()" } })
+        </div>
+        @Html.Action("ConstructionsFilter", "Report", new { Model.Construction.Id })
+
+    </div>
+</div>
+
+
+
+<script>
+    $("document").ready(function () {
+        UpdateResult();
+    });
+
+</script>

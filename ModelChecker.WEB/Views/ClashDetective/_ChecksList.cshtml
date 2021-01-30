@@ -1,0 +1,53 @@
+﻿@using ModelChecker.DTO;
+@using ModelChecker.WEB.Models;
+
+
+@model IEnumerable<FullCheckDTO>
+
+@{
+    ViewBag.AllQnt = Model.Sum(x => x.AtWorkClashesQnt);
+
+    Orders _orders = ViewBag.Orders;
+}
+
+<style>
+    .my-arrow {
+        display: none;
+    }
+
+    .my-cb:checked ~ label .my-arrow {
+        display: block !important;
+    }
+</style>
+
+<div class="d-flex flex-row table-header">
+    <div class="fix-w-40 p-2 border-right border-light ml-1">
+        @_Controls.CustomCheckBox(0, false, "checks", "", "CheckAll(this, 'checlslist');")
+    </div>
+
+    @_Controls.HeadCell(@Resources.Global.CheckName, "CheckName", Orders.Name, _orders, " col-3", "text-left", " border-0")
+    <div class="fix-w-40">
+
+    </div>
+    @_Controls.HeadCell(@Resources.Global.Clashes, "Clashes", Orders.Clashes, _orders, border: "border-right border-left border-secondary-light")
+    @_Controls.HeadCell(@Resources.Global.StatusCreate, "StatusCreate", Orders.Create, _orders)
+    @_Controls.HeadCell(@Resources.Global.StatusActive, "StatusActive", Orders.Active, _orders)
+    @_Controls.HeadCell(@Resources.Global.StatusAnalized, "StatusAnalized", Orders.Analized, _orders)
+    @_Controls.HeadCell(@Resources.Global.StatusConfirmed, "StatusConfirmed", Orders.Confirmed, _orders)
+    @_Controls.HeadCell(@Resources.Global.StatusCorrected, "StatusCorrected", Orders.Corrected, _orders)
+    @_Controls.HeadCell(@Resources.Global.Date, "Date", Orders.Date, _orders)
+</div>
+
+<div id="checlslist" >
+    @foreach (var item in Model.AsParallel().AsOrdered())
+    {
+        <section class="d-none p-0">
+            @using (Ajax.BeginForm("UpdateCheck", new { Id = item.Id }
+               , new AjaxOptions() { UpdateTargetId = "rightdialog", HttpMethod = "Get", LoadingElementId = "loading" }
+               , new { Id = $"EditCheckForm{item.Id}" })) { }
+        </section>
+        @Html.Partial("_CheckRow", (CheckViewModel)item)
+    }
+</div>
+
+@Html.Partial("_TotalRow", new StatusReportViewModel(Model))

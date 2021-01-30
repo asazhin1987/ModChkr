@@ -1,0 +1,34 @@
+﻿@using ModelChecker.WEB.Models
+
+@model ResultActionViewModel
+
+<script>
+
+    @*function OnComplete() {
+
+             var F = new Function('@Model.ActionResultFunction');
+                return (F());
+    }*@
+
+    $("document").ready(function () {
+        @Model.ActionResultFunction;
+        hideModalRight();
+    });
+</script>
+
+<div class="d-flex flex-column align-self-stretch align-content-center bg-white">
+    <br />
+    <h2 class="text-secondary text-center">
+        @Model.Message
+    </h2>
+    <hr />
+    <button type="submit"
+            data-dismiss="modal" class="btn btn-secondary rounded-0">
+        @Resources.Global.Continue
+    </button>
+    <br />
+</div>
+
+
+
+

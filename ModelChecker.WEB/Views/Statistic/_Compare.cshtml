@@ -1,0 +1,189 @@
+﻿@using ModelChecker.WEB.Models;
+@model CompareViewModel
+
+<style>
+    #compareBtn {
+        border-bottom: solid 1px #1abc9c !important;
+        color: #1abc9c !important;
+    }
+
+    #result {
+        overflow: auto;
+        width: calc( 100vw - 270px);
+        height: calc( 100vh - 110px);
+    }
+
+    .myrow {
+        min-width:100%;
+    }
+
+
+        .myrow:hover, .myrow:hover .fixed-left {
+        }
+
+        .details, .details .flex-row{
+             min-width:100%;
+        }
+</style>
+
+<script>
+    function CollapseChanged(id) {
+        var _el = document.getElementById(id);
+        if (_el != null) {
+            if (_el.classList.contains('rotate-90')) {
+                _el.classList.remove('rotate-90');
+            }
+            else {
+                _el.classList.add('rotate-90');
+            }
+        }
+
+    }
+</script>
+
+
+@if (Model.Checks == null)
+{
+    <div class="container-fluid m-3">
+        <h2 class="text-center">@Resources.Global.NullCollection</h2>
+    </div>
+}
+else
+{
+
+    /*Table head*/
+    <div class="d-inline-flex flex-row table-header" style="top:0!important;min-width:100%;">
+        <div class="corner bg-white p-2">
+            @Resources.Global.CheckName
+        </div>
+        @foreach (string right in Model.RightChecks.AsParallel().AsOrdered())
+        {
+            <div class="fix-w-200 border-right text-center">
+                <p class="m-0 p-2">@right</p>
+                <div class="d-flex flex-row border-top border-light">
+                    <div class="col-6  border-right border-light p-1">
+                        @Resources.Global.Clashes
+                    </div>
+                    <div class="col-6 p-1">
+                        @Resources.Global.StatusCorrected
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    foreach (string left in Model.LeftChecks.AsParallel().AsOrdered())
+    {
+        <div class="d-inline-flex flex-row border-bottom bg-white myrow" >
+            <div class="fixed-left bg-white  pl-2 " style="cursor:pointer;"
+                 data-toggle="collapse" href="#collapse_@left" role="button" aria-expanded="false" aria-controls="collapse_@left"
+                 onclick="CollapseChanged('arrow_@left');">
+                <p class="col pr-2">@left</p>
+                <span class="mr-2 text-primary-green arrow position-absolute " style="top:0.25rem;right:0.25rem;" id="arrow_@left">&#10095;</span><!--qqqqqqqqqqqqqqqqqqqqqqqqqqq-->
+            </div>
+            @foreach (string right in Model.RightChecks.AsParallel().AsOrdered())
+            {
+                var _checks = Model.Checks.Where(x => x.LeftCheckName == left && x.RightCheckName == right);
+                int firstall = _checks.Sum(s => s.StartPeriodActiveQnt) + _checks.Sum(s => s.StartPeriodCreatedQnt);
+                int firstcom = _checks.Sum(s => s.StartPeriodCorrectedQnt);
+                int lastall = _checks.Sum(s => s.EndPeriodActiveQnt) + _checks.Sum(s => s.EndPeriodCreatedQnt); ;
+                int lastcom = _checks.Sum(s => s.EndPeriodCorrectedQnt); ;
+
+                <div class="fix-w-200 border-right text-center">
+                    <div class="d-flex flex-row ">
+                        <div class="col-6 p-1  border-right border-light">
+                            @_Controls.QntCell(firstall, lastall, true, firstall < lastall)
+                        </div>
+                        <div class="col-6 p-1">
+                            @_Controls.QntCell(firstcom, lastcom, true, firstcom > lastcom)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!--details-->
+        <div class="collapse details" id="collapse_@left" >
+            <div class="d-inline-flex flex-row border-bottom bg-light p-0 ">
+                <div class="fixed-left bg-light text-right pr-2 m-0" style="font-size:10pt;">
+                    <p class="pr-2 m-0" style="border-right:solid 2px #dc3545">@Resources.Global.StatusCreate</p>
+                </div>
+                @foreach (string right in Model.RightChecks.AsParallel().AsOrdered())
+                {
+                    var _checks = Model.Checks.Where(x => x.LeftCheckName == left && x.RightCheckName == right);
+                    int firs = _checks.Sum(s => s.StartPeriodCreatedQnt);
+                    int last = _checks.Sum(s => s.EndPeriodCreatedQnt);
+
+                    <div class="fix-w-200 border-right text-center p-0">
+                        <div class="d-flex flex-row m-0 p-0 ">
+                            <div class="col-6 m-0 pb-1  border-right border-white p-1 ">
+                                @_Controls.QntCell(firs, last, true, firs < last)
+                            </div>
+                            <div class="col-6 m-0 p-0"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="d-inline-flex flex-row border-bottom bg-light p-0 ">
+                <div class="fixed-left bg-light text-right pr-2 " style="font-size:10pt;">
+                    <p class="pr-2 m-0" style="border-right:solid 2px #ffc107">@Resources.Global.StatusActive</p>
+                </div>
+                @foreach (string right in Model.RightChecks.AsParallel().AsOrdered())
+                {
+                    var _checks = Model.Checks.Where(x => x.LeftCheckName == left && x.RightCheckName == right);
+                    int firs = _checks.Sum(s => s.StartPeriodActiveQnt);
+                    int last = _checks.Sum(s => s.EndPeriodActiveQnt);
+
+                    <div class="fix-w-200 border-right text-center p-0">
+                        <div class="d-flex flex-row p-0">
+                            <div class="col-6 pb-1  border-right border-white p-1 ">
+                                @_Controls.QntCell(firs, last, true, firs < last)
+                            </div>
+                            <div class="col-6"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="d-inline-flex flex-row border-bottom bg-light p-0 ">
+                <div class="fixed-left bg-light text-right pr-2 " style="font-size:10pt;">
+                    <p class="pr-2 m-0" style="border-right:solid 2px #007bff">@Resources.Global.StatusAnalized</p>
+                </div>
+                @foreach (string right in Model.RightChecks.AsParallel().AsOrdered())
+                {
+                    var _checks = Model.Checks.Where(x => x.LeftCheckName == left && x.RightCheckName == right);
+                    int firs = _checks.Sum(s => s.StartPeriodAnalizedQnt);
+                    int last = _checks.Sum(s => s.EndPeriodAnalizedQnt);
+
+                    <div class="fix-w-200 border-right text-center p-0">
+                        <div class="d-flex flex-row p-0">
+                            <div class="col-6 pb-1  border-right border-white p-1 ">
+                                @_Controls.QntCell(firs, last, true, firs > last)
+                            </div>
+                            <div class="col-6"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="d-inline-flex flex-row border-bottom bg-light p-0 ">
+                <div class="fixed-left bg-light text-right pr-2 " style="font-size:10pt;">
+                    <p class="pr-2 m-0" style="border-right:solid 2px #34495E">@Resources.Global.StatusConfirmed</p>
+                </div>
+                @foreach (string right in Model.RightChecks.AsParallel().AsOrdered())
+                {
+                    var _checks = Model.Checks.Where(x => x.LeftCheckName == left && x.RightCheckName == right);
+                    int firs = _checks.Sum(s => s.StartPeriodConfirmedQnt);
+                    int last = _checks.Sum(s => s.EndPeriodConfirmedQnt);
+
+                    <div class="fix-w-200 border-right text-center p-0">
+                        <div class="d-flex flex-row p-0">
+                            <div class="col-6 pb-1  border-right border-white p-1 ">
+                                @_Controls.QntCell(firs, last, true, firs > last)
+                            </div>
+                            <div class="col-6"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    }
+}

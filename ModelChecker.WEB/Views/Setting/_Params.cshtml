@@ -1,0 +1,17 @@
+﻿@using ModelChecker.WEB.Models;
+
+@model ParamsViewModel
+
+
+<p class="p-0 m-0 text-secondary">@Html.DisplayNameFor(x => x.Delimiter)</p>
+<h5 class="form-control">@Html.DisplayFor(x => x.Delimiter)</h5>
+
+<p class="p-0 m-0">@Html.DisplayNameFor(x => x.DatRetentionPeriod)</p>
+<h5 class="form-control">@Html.DisplayFor(x => x.DatRetentionPeriod)</h5>
+
+@using (Ajax.BeginForm("EditParams", null
+           , new AjaxOptions() { UpdateTargetId = "results", HttpMethod = "Get", LoadingElementId = "loading" }
+           , new { Id = $"EditForm" }))
+{
+    <button type="submit" class="btn btn-secondary rounded-0">@Resources.Global.Edit</button>
+}

@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    >
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Brushes.xaml"/>
+		<ResourceDictionary Source="Geometry.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style TargetType="{x:Type DataGrid}">
+		<Setter Property="HeadersVisibility" Value="Column"/>
+		<Setter Property="ColumnHeaderHeight" Value="32"/>
+		<Setter Property="RowHeight" Value="32"/>
+		<Setter Property="BorderBrush" Value="{StaticResource BorderGray1}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+		<Setter Property="AlternatingRowBackground" Value="{StaticResource BorderGray1}"/>
+		<Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BorderGray1}"/>
+		<Setter Property="VerticalGridLinesBrush" Value="{StaticResource BorderGray1}"/>
+		<Setter Property="GridLinesVisibility" Value="All"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="VerticalAlignment" Value="Stretch"/>
+	</Style>
+	
+
+	<!--<Style TargetType="{x:Type DataGridColumnHeader}" x:Key="GridColumnHeaderLeft">
+		<Setter Property="Background" Value="{StaticResource Gray1}"/>
+		<Setter Property="Opacity" Value="0.7"/>
+		<Setter Property="BorderBrush" Value="#95989A"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="Padding" Value="8"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ForegroundColor}"/>
+		<Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+		<Setter Property="BorderThickness" Value="0,0,1,0"/>
+	</Style>
+
+	<Style TargetType="{x:Type DataGridColumnHeader}" x:Key="GridColumnHeader">
+		<Setter Property="Background" Value="{StaticResource Gray1}"/>
+		<Setter Property="Opacity" Value="0.7"/>
+		<Setter Property="BorderBrush" Value="#95989A"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="BorderBrush" Value="{StaticResource ForegroundColor}"/>
+		<Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+		<Setter Property="BorderThickness" Value="0,0,1,0"/>
+	</Style>
+
+	<Style TargetType="{x:Type DataGridColumnHeader}" x:Key="GridColumnHeadertLast">
+		<Setter Property="Background" Value="{StaticResource Gray1}"/>
+		<Setter Property="Opacity" Value="0.7"/>
+		<Setter Property="BorderBrush" Value="#95989A"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="BorderBrush" Value="{StaticResource ForegroundColor}"/>
+		<Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+		<Setter Property="BorderThickness" Value="0,0,0,0"/>
+	</Style>-->
+
+	<!--<Style TargetType="{x:Type DataGridComboBoxColumn}">
+		<Setter Property="DisplayIndex" Value="0"/>
+		<Setter Property="ElementStyle" Value="{StaticResource ResourceKey=test}"/>
+	</Style>-->
+
+	<Style TargetType="{x:Type DataGridCell}" x:Key="CellCenterAligment">
+
+	</Style>
+
+</ResourceDictionary>

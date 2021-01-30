@@ -1,0 +1,106 @@
+﻿<ResourceDictionary x:Class="BIMACAD_Style.BIMACAD_Window"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Brushes.xaml"/>
+		<ResourceDictionary Source="Geometry.xaml"/>
+		<ResourceDictionary Source="Button.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style x:Key="BimTaskWindow" TargetType="{x:Type Window}">
+		<Setter Property="AllowsTransparency" Value="True"/>
+		<Setter Property="WindowStyle" Value="None"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Window}">
+					<Grid
+                        Margin="20"
+                        TextOptions.TextRenderingMode="ClearType"
+                        TextOptions.TextFormattingMode="Display">
+						<Border
+                            x:Name="PART_Border" Width="Auto"
+                            Height="Auto" Background="#f8f9fa"
+                            BorderThickness="0" Padding="0" CornerRadius="0">
+							<Border.Effect>
+								<DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.8" Color="Gray" />
+							</Border.Effect>
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="32"/>
+									<RowDefinition Height="*"/>
+								</Grid.RowDefinitions>
+								<!--Header-->
+								<Border Grid.Row="0" CornerRadius="0,0,0,0"
+                                        MouseLeftButtonDown="TitleBarMouseLeftButtonDown"
+                                        MouseMove="TitleBarMouseMove">
+									<Border.Background>
+										<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+											<GradientStop Color="#f8f9fa" Offset="0"/>
+											<GradientStop Color="#f8f9fa" Offset="0.5"/>
+										</LinearGradientBrush>
+									</Border.Background>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<StackPanel Orientation="Horizontal" Grid.Column="0">
+											<TextBlock x:Name="WindowTitle" Text="BIMACAD MODEL CHECKER" 
+												 Foreground="#1abc9c" HorizontalAlignment="Left" FontWeight="Bold"
+												 VerticalAlignment="Center" Margin="8,0,0,0" FontSize="16"/>			
+										</StackPanel>
+										<Button x:Name="closeButton" Style="{StaticResource myclosebtn}" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,0,0" Click="CloseButtonClick"/>
+									</Grid>
+								</Border>
+								<!--Body-->
+								<Grid Grid.Row="1">
+									<ContentPresenter Grid.Row="1"/>
+								</Grid>
+							</Grid>
+						</Border>
+						<Line
+                            MouseDown="OnSizeNorth"
+                            x:Name="lnSizeNorth"
+                            Stroke="Transparent"
+                            Cursor="SizeNS"
+                            X1="1" X2="{TemplateBinding ActualWidth}" Y1="1" Y2="1"
+                            StrokeThickness="3"
+                            />
+						<Line
+                            MouseDown="OnSizeSouth"
+                            x:Name="lnSizeSouth"
+                            Stroke="Transparent"
+                            VerticalAlignment="Bottom" 
+                            Cursor="SizeNS"
+                            X1="1" X2="{TemplateBinding ActualWidth}" Y1="{TemplateBinding ActualHeight}" Y2="{TemplateBinding ActualHeight}"
+                            StrokeThickness="3"
+                            />
+						<Line
+                            MouseDown="OnSizeWest"
+                            x:Name="lnSizeWest"
+                            Stroke="Transparent"
+                            Cursor="SizeWE"
+                            X1="1" X2="1" Y1="1" Y2="{TemplateBinding ActualHeight}"
+                            StrokeThickness="3"
+                            />
+						<Line
+                            MouseDown="OnSizeEast"
+                            x:Name="lnSizeEast"
+                            Stroke="Transparent"
+                            HorizontalAlignment="Right" 
+                            Cursor="SizeWE"
+                            X1="{TemplateBinding ActualWidth}" X2="{TemplateBinding ActualWidth}" Y1="1" Y2="{TemplateBinding ActualHeight}"
+                            StrokeThickness="3"
+                            />
+						<Rectangle MouseDown="OnSizeNorthWest" x:Name="rectSizeNorthWest" Cursor="SizeNWSE" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Left" />
+						<Rectangle MouseDown="OnSizeNorthEast" x:Name="rectSizeNorthEast" Cursor="SizeNESW" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Right" />
+						<Rectangle MouseDown="OnSizeSouthWest" x:Name="rectSizeSouthWest" Cursor="SizeNESW" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+						<Rectangle MouseDown="OnSizeSouthEast" x:Name="rectSizeSouthEast" Cursor="SizeNWSE" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

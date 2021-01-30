@@ -1,0 +1,131 @@
+﻿
+
+<script>
+
+    function ClearRightModal() {
+        $("#rightdialog").html("<span class='text-secondaty'>5 sec ...</span>");
+    }
+
+     function ClearSmallModal() {
+            $("#smalldialog").html("<span class='text-secondaty'>5 sec ...</span>");
+    }
+
+    function hideModalRight() {
+        $('#rightModal').modal('hide');
+        ClearRightModal();
+    }
+
+    function hideModalSmall() {
+        $('#smallModal').modal('hide');
+        ClearSmallModal();
+    }
+
+    function ShowModalSmall() {
+         $('#smallModal').modal('show');
+    }
+
+     function ShowModalRight() {
+         $('#rightModal').modal('show');
+    }
+</script>
+
+<style>
+
+
+    #rightmodalsize ~ #modal-dialog-right {
+        width: 520px;
+    }
+
+    #rightmodalsize:checked ~ #modal-dialog-right {
+        width: 100vw !important;
+    }
+
+
+    #modal-dialog-right {
+        -webkit-transition: width 0.3s ease-in-out;
+        -moz-transition: width 0.3s ease-in-out;
+        -o-transition: width 0.3s ease-in-out;
+        transition: width 0.3s ease-in-out;
+    }
+
+    .modal.right .modal-dialog {
+        position: fixed;
+        margin: auto;
+        max-width: 100vw !important;
+        height: 100%;
+        -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0%, 0, 0);
+    }
+
+    .modal.right .modal-content {
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .modal.right .modal-body {
+        /*padding: 16px;*/
+    }
+
+    .modal.right.fade .modal-dialog {
+        right: -100vw;
+        -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+        -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+        -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+        transition: opacity 0.3s linear, right 0.3s ease-out;
+    }
+
+    .modal.right.fade.show .modal-dialog {
+        right: 0;
+    }
+</style>
+
+<!--Modal Right-->
+<div class="modal right fade " id="rightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <input type="checkbox" id="rightmodalsize" class="d-none" />
+    <div class="modal-dialog " role="document" id="modal-dialog-right">
+        <div class="modal-content bg-light rounded-0">
+            @*<label for="rightmodalsize" class="resize bg-white position-sticky pl-2" id="resizelabel" style="top:0;z-index:99;">
+                    Изменить размер окна
+                </label>*@
+            <div class="spinner-grow"
+                 style="display:none;position:absolute;top:32px;z-index:999;left:245px;height:80px; width:80px;" role="status" id="locloading">
+                <span class="sr-only">Loading...</span>
+            </div>
+
+            <div class="modal-body p-0 m-0" id="rightdialog">
+                <img src='~/Content/Images/catloader.gif' />
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#rightModal').on('hide.bs.modal', function (e) {
+            ClearRightModal();
+        });
+    </script>
+</div>
+
+<!-- Small Dialog-->
+<div class="modal fade" id="smallModal" tabindex="-1" role="dialog" aria-labelledby="SmallModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="smalldialog">
+
+            </div>
+            <button type="button" id="" class="btn btn-secondary rounded-0" data-dismiss="modal">ОК</button>
+        </div>
+    </div>
+
+    <script>
+        $('#smallModal').on('hide.bs.modal', function (e) {
+            ClearSmallModal();
+        });
+    </script>
+</div>

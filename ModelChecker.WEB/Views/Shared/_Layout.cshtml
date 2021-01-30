@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/gif/png" href="~/Content/Images/emblem.jpeg">
+
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/bimacad-controls.css" rel="stylesheet" />
+    <link href="~/Content/bimacad-grid.css" rel="stylesheet" />
+
+    <script src="~/Scripts/bimacad-ui.js"></script>
+    <script src="~/Scripts/umd/popper.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <link href="~/Content/kendo/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/kendo.rtl.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/kendo.default.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/kendo.mobile.all.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/kendo/angular.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.angular.min.js"></script>
+    <script src="~/Scripts/kendo/jszip.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
+
+    @Scripts.Render("~/scripts/jquery.validate.min.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        textarea, input, select {
+            max-width: 1080px !important;
+        }
+
+        #renderbody {
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light position-sticky" style="top:0;z-index:99!important;height:50px!important;">
+        <div class="  p-1 m-0 " style="">
+            <img src="~/Content/Images/emblem.jpeg" style="height:38px;width:38px;" />
+        </div>
+        <div class="navbar-brand text-light-green font-weight-bold pl-2">
+            BIMACAD MODEL CHECKER
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <ul class="navbar-nav">
+                @Html.Action("PageMenu", "ModelChecker")
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid  " id="renderbody">
+        @RenderBody()
+    </div>
+    <div class="spinner-grow" style="display:none;position:absolute;top:50%;z-index:999;left:50%;height:80px; width:80px;" role="status" id="loading">
+        <span class="sr-only">Loading...</span>
+    </div>
+    @Html.Partial("_Modal")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

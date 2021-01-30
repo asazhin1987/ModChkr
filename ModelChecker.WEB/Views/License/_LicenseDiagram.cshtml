@@ -1,0 +1,90 @@
+﻿@using ModelChecker.WEB.Models
+
+@model LicenseMonthsDiagramViewModel
+
+@if (Model.Qnter1.Count() == 0)
+{
+    <h5 class="p-3">@Resources.Global.NullCollection</h5>
+}
+else
+{
+
+
+    <div id="licdiagram">
+        
+    </div>
+
+    <script>
+     function CreateLicDiagram() {
+            var count2 = @Html.Raw(Json.Encode(Model.Qnter1));
+            //var count3 = @Html.Raw(Json.Encode(Model.Qnter2));
+
+            var dates = @Html.Raw(Json.Encode(Model.Dates));
+
+
+             $("#licdiagram").kendoChart({
+                legend: {
+                    visible: true,
+                    position: "bottom",
+                    labels: {
+                        font: "11px sans-serif",
+                    }
+                },
+                chartArea: {
+                    height: 200
+                },
+
+                seriesDefaults: {
+                    type: "line",
+                    missingValues: "gap"
+                },
+                series: [
+                    {
+                        type: "area",
+                        name: "@Resources.Global.LicenseUsedQnt",
+                        data: count2,
+                        color: "#1abc9c"
+
+                    }],
+
+                valueAxis: {
+                    line: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true
+                    },
+                    labels: {
+                        rotation: "auto"
+                    }
+                },
+                categoryAxis: {
+                    categories: dates,
+                    color: "#34495E",
+                    majorGridLines: {
+                        visible: true
+                    },
+                    crosshair: {
+                        color: "#34495E",
+                        width: 1,
+                        visible: true,
+                        opacity: 0.5
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= series.name #: #= value #"
+                }
+
+            });
+        }
+
+        $(document).ready(function () {
+            CreateLicDiagram();
+         });
+
+        $(window).resize(CreateLicDiagram);
+    </script>
+
+
+}

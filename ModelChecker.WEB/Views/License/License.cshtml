@@ -1,0 +1,27 @@
+﻿
+
+@using ModelChecker.WEB.Models;
+
+@model LicenseReportViewModel
+
+@{
+    ViewBag.Title = Resources.Menu.License;
+}
+
+
+<!--FORMS SECTION-->
+<section class="d-none p-0">
+
+    @using (Ajax.BeginForm("LicensePartial", null
+              , new AjaxOptions() { UpdateTargetId = "results", HttpMethod = "Get", LoadingElementId = "loading" }
+              , new { Id = $"UpdateForm" }))
+    {<button type="submit" class="d-none"></button>}
+
+</section>
+
+
+
+<div class="d-flex flex-column bg-light p-2 " style="min-width:1080px!important;" id="results">
+   @Html.Partial("_License", Model)
+</div>
+

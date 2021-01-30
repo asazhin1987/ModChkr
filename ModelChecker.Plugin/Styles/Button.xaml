@@ -1,0 +1,624 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    >
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Brushes.xaml"/>
+		<ResourceDictionary Source="Geometry.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+	<!--    -->
+	<Style x:Key="Common" TargetType="{x:Type Button}">
+		<Setter Property="Foreground" Value="{StaticResource Gray1}"/>
+		<Setter Property="MinHeight" Value="0"/>
+		<Setter Property="Background" Value="{StaticResource MainColor}"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Template">
+			<Setter.Value >
+				<ControlTemplate TargetType="Button">
+					<Border Background="{TemplateBinding Background}" CornerRadius="20">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color7}">
+										</ColorAnimation>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color1}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="MouseOver">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color6}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Normal">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color1}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="DarkButton" TargetType="{x:Type Button}">
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="MinHeight" Value="20"/>
+		<Setter Property="Background" Value="{StaticResource TextColor}"/>
+		<Setter Property="MinHeight" Value="25"/>
+		<Setter Property="Template">
+			<Setter.Value >
+				<ControlTemplate TargetType="Button">
+					<Border Background="{TemplateBinding Background}" CornerRadius="0">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color9}">
+										</ColorAnimation>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color2}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="MouseOver">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color8}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Normal">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color2}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	
+	
+
+	<Style x:Key="UpdateButton" TargetType="{x:Type Button}">
+		<Setter Property="Foreground" Value="#464646"/>
+		<Setter Property="MinHeight" Value="0"/>
+		<Setter Property="Background" Value="#FFFFFF"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Template">
+			<Setter.Value >
+				<ControlTemplate TargetType="Button">
+					<Border Background="{TemplateBinding Background}" CornerRadius="0" BorderBrush="{StaticResource MainColor}" BorderThickness="0" >
+						<StackPanel Orientation="Horizontal">
+							<Path Stretch="Fill" Fill="#FFB74D" Margin="8.4,4,8.3,4" Width="23.27" Height="32" Data="{StaticResource UpdateButtonImage}" >
+
+							</Path>
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,8,8,8"/>
+						</StackPanel>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color7}">
+										</ColorAnimation>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color1}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="MouseOver">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color1}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Normal">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="#FFFFFF">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+
+
+	<Style x:Key="myclosebtn" TargetType="{x:Type Button}">
+		<Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+		<Setter Property="MinHeight" Value="32"/>
+		<Setter Property="MinWidth" Value="60"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Template">
+			<Setter.Value >
+				<ControlTemplate TargetType="Button">
+					<Border Background="{TemplateBinding Background}">
+						<Grid>
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							<Rectangle Width="1" Height="16.97" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                         Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5" RadiusX="2" RadiusY="2">
+								<Rectangle.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform Angle="45"/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Rectangle.RenderTransform>
+							</Rectangle>
+							<Rectangle Width="1" Height="16.97" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5" RadiusX="2" RadiusY="2">
+								<Rectangle.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform Angle="-45"/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Rectangle.RenderTransform>
+							</Rectangle>
+
+						</Grid>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color7}">
+										</ColorAnimation>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color1}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="MouseOver">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color1}">
+										</ColorAnimation>
+
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Normal">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="Transparent">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	
+
+	<Style x:Key="CloseBtn" TargetType="{x:Type Button}">
+		<Setter Property="Background" Value="#ECF0F1"/>
+		<Setter Property="Template">
+			<Setter.Value >
+				<ControlTemplate TargetType="Button">
+					<Border>
+						<Grid>
+							<Rectangle Width="1" Height="16.97" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{TemplateBinding Background}" RenderTransformOrigin="0.5,0.5" RadiusX="2" RadiusY="2">
+								<Rectangle.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform Angle="45"/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Rectangle.RenderTransform>
+							</Rectangle>
+							<Rectangle Width="1" Height="16.97" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{TemplateBinding Background}" RenderTransformOrigin="0.5,0.5" RadiusX="2" RadiusY="2">
+								<Rectangle.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform Angle="-45"/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Rectangle.RenderTransform>
+							</Rectangle>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="Mouse.MouseEnter">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<ColorAnimation 
+                                        Duration="00:00:0.2" 
+                                        Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+                                        To="#FFB74D" />
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Mouse.MouseLeave">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<ColorAnimation 
+                                        Duration="00:00:0.2" 
+                                        Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+                                        To="#ECF0F1" />
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+
+
+	<!--<Style x:Key="mailtoBtn" TargetType="{x:Type Button}">
+		<Setter Property="Width" Value="40"/>
+		<Setter Property="Height" Value="40"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="border" CornerRadius="20" >
+						<Border.Background>
+							<LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+								<GradientStop Color="#0FA2B7" Offset="0"/>
+								<GradientStop Color="#1ABC9C" Offset="1"/>
+							</LinearGradientBrush>
+						</Border.Background>
+						<DockPanel>
+							<Image Source="..\Files\envelope.png" Width="25" Height="20"/>
+						</DockPanel>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>-->
+
+	<!--<Style x:Key="RegistrButton" TargetType="{x:Type Button}">
+		<Setter Property="Width" Value="40"/>
+		<Setter Property="Height" Value="40"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="border">
+						<DockPanel>
+							<Path Stretch="Fill" Fill="#464646" Opacity="0.5" Margin="0,0,0,0" Width="32" Height="32" Data="{StaticResource imgMen}" ></Path>
+							<TextBlock Text="Регистрация" TextAlignment="Right"  VerticalAlignment="Center" Margin="8,8,0,8" Foreground="#464646" Opacity="0.5" ></TextBlock>
+						</DockPanel>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>-->
+
+	<!--<Style x:Key="ImageButton" TargetType="{x:Type Button}">
+		<Setter Property="Width" Value="40"/>
+		<Setter Property="Height" Value="40"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="border">
+						<Path Stretch="Fill" Fill="#464646" Opacity="0.5" Margin="0,0,0,0" Width="32" Height="32" Data="{StaticResource imgMen}" ></Path>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>-->
+
+	<!--<Style x:Key="ChaikaButton" TargetType="{x:Type Button}">
+		<Setter Property="MinWidth" Value="32"/>
+		<Setter Property="MinHeight" Value="32"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="border" Height="32" Width="32" Background="Transparent">
+						<Path Stretch="Fill" Fill="#FFFFFF" Margin="0,0,0,0" Width="12" Height="6.53" Data="{StaticResource Arrow}"  >
+
+						</Path>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										--><!--<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color7}">
+										</ColorAnimation>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color1}">
+										</ColorAnimation>--><!--
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="MouseOver">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{StaticResource color1}">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Normal">
+									<Storyboard>
+										<ColorAnimation Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="Transparent">
+										</ColorAnimation>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>-->
+
+	<!--<Style x:Key="ChaikaTreeNodeButton" TargetType="{x:Type Button}">
+		<Setter Property="MinWidth" Value="12"/>
+		<Setter Property="MinHeight" Value="12"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="border" Height="12" Width="12" Background="Transparent">
+						<Path Stretch="Fill" Fill="#464646" Margin="0,0,0,0" Width="12" Height="6.53" Data="{StaticResource Arrow}" >
+							<Path.LayoutTransform>
+								<RotateTransform Angle="180" ></RotateTransform>
+							</Path.LayoutTransform>
+						</Path>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>-->
+
+	<!--<Style x:Key="ImgPlusButton" TargetType="{x:Type Button}">
+		<Setter Property="Width" Value="64"/>
+		<Setter Property="Height" Value="64"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="border"  BorderBrush="{StaticResource ForegroundColorDark}" BorderThickness="1"  Height="64" Width="64" Margin="0" Background="#FFFFFF">
+						<Path Stretch="Fill" Fill="#767676" HorizontalAlignment="Stretch" Margin="0" Width="12.97" Height="12.97" Data="{StaticResource PlusButtonImg}" >
+							<Path.RenderTransform>
+								<TransformGroup>
+									<ScaleTransform/>
+									<SkewTransform/>
+									<RotateTransform/>
+									<TranslateTransform/>
+								</TransformGroup>
+							</Path.RenderTransform>
+						</Path>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="LineButton" TargetType="{x:Type Button}">
+		<Setter Property="Width" Value="32"/>
+		<Setter Property="Height" Value="32"/>
+		<Setter Property="Background" Value="red"></Setter>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="border" Height="32" Width="32" Background="Red" >
+						<Line Stroke="{StaticResource ForegroundColorDark}" StrokeThickness="1" X1="9.5" Y1="16" X2="21.5" Y2="16"></Line>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	
+
+	<Style x:Key="LineButton3" TargetType="{x:Type Button}">
+		<Setter Property="Foreground" Value="{StaticResource ForegroundColorDark}"/>
+		<Setter Property="MinHeight" Value="32"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Template">
+			<Setter.Value >
+				<ControlTemplate TargetType="Button">
+					<Border  Background="{TemplateBinding Background}">
+						<Grid>
+							<Rectangle Name="lineone" Width="12" Height="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 13, 0,0 " Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0,0" RadiusX="2" RadiusY="2">
+								<Rectangle.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Rectangle.RenderTransform>
+							</Rectangle>
+							<Rectangle Name="linetwo" Width="12" Height="1" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0,0" RadiusX="2" RadiusY="2">
+								<Rectangle.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Rectangle.RenderTransform>
+							</Rectangle>
+							<Rectangle Name="linethree" Width="12" Height="1" Margin="0, 0, 0,12.3 "  
+                         HorizontalAlignment="Center" VerticalAlignment="Bottom" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0,0" RadiusX="2" RadiusY="2">
+								<Rectangle.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Rectangle.RenderTransform>
+							</Rectangle>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="Mouse.MouseEnter">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<ColorAnimation 
+											Duration="00:00:0.2" 
+											Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+											To="Red" />
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Mouse.MouseLeave">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<ColorAnimation 
+											Duration="00:00:0.2" 
+											Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+											To="Transparent" />
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Mouse.MouseLeave">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<ColorAnimation 
+											Duration="00:00:0.2" 
+											Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+											To="Transparent" />
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>-->
+
+
+	<Style x:Key="SbrosPodobrDis" TargetType="{x:Type Button}">
+		<Setter Property="Foreground" Value="{StaticResource disab}" />
+
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="FontSize" Value="12"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border Background="Transparent" 
+                  BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+
+	<!--<Style x:Key="SbrosEn2" TargetType="{x:Type Button}">
+		<Setter Property="FontFamily" Value="..\Styles\#Roboto" />
+		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="{StaticResource Gray1}" />
+		<Setter Property="Height" Value="32"/>
+		<Setter Property="Width" Value="120"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="BorderThickness" Value="2" />
+		<Setter Property="IsEnabled" Value="True"/>
+		<Setter Property="BorderBrush" Value="{StaticResource Gray1}"/>
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" 
+                  BorderThickness="2" CornerRadius="4">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+
+		<Style.Triggers>
+
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="Button">
+							<Border Background="Transparent" BorderBrush="{StaticResource color1}"  BorderThickness="1" CornerRadius="4">
+								<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							</Border>
+
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+
+				<Trigger.EnterActions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="00:00:0.2" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" To="{StaticResource color1}" />
+						</Storyboard>
+
+					</BeginStoryboard>
+				</Trigger.EnterActions>
+			</Trigger>
+
+			<Trigger Property="IsMouseOver" Value="False">
+				<Setter Property="BorderThickness" Value="2"/>
+				<Setter Property="Foreground" Value="#464646"/>
+				<Setter Property="BorderBrush" Value="#464646"/>
+			</Trigger>
+
+		</Style.Triggers>
+	</Style>-->
+
+</ResourceDictionary>

@@ -1,0 +1,103 @@
+﻿@using ModelChecker.DTO;
+
+@model IEnumerable<DailySliceDTO>
+
+@if (Model.Count() == 0)
+{
+    <h5 class="p-3">@Resources.Global.NullCollection</h5>
+}
+else
+{
+    <script>
+     function CreateDiagram() {
+            var count2 = @Html.Raw(Json.Encode(Model.Select(x => x.CreatedQnt)));
+            var count3 = @Html.Raw(Json.Encode(Model.Select(x => x.ActiveQnt)));
+            var count4 = @Html.Raw(Json.Encode(Model.Select(x => x.AnalizedQnt)));
+            var count5 = @Html.Raw(Json.Encode(Model.Select(x => x.ConfirmedQnt)));
+            var count6 = @Html.Raw(Json.Encode(Model.Select(x => x.CorrectedQnt)));
+
+            var dates = @Html.Raw(Json.Encode(Model.Select(x => x.Date.ToShortDateString())));
+
+
+            $("#diagram").kendoChart({
+                legend: {
+                    visible: true,
+                    position: "bottom",
+                    labels: {
+                        font: "11px sans-serif",
+                    }
+                },
+                chartArea: {
+                    height: 300
+                },
+
+                seriesDefaults: {
+                    type: "line",
+                    missingValues: "gap"
+                },
+                series: [
+                    {
+                        name: "@Resources.Global.StatusCreate",
+                        data: count2,
+                        color: "#dc3545"
+
+                    }, {
+                        name: "@Resources.Global.StatusActive",
+                        data: count3,
+                        color: "#ffc107"
+                    }, {
+                        name: "@Resources.Global.StatusAnalized",
+                        data: count4,
+                        color: "#007bff"
+                    }, {
+                        name: "@Resources.Global.StatusConfirmed",
+                        data: count5,
+                        color: "#34495E"
+                    }, {
+                        name: "@Resources.Global.StatusCorrected",
+                        data: count6,
+                        color: "#1abc9c"
+                    }],
+
+                valueAxis: {
+                    line: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true
+                    },
+                    labels: {
+                        rotation: "auto"
+                    }
+                },
+                categoryAxis: {
+                    categories: dates,
+                    color: "#34495E",
+                    majorGridLines: {
+                        visible: true
+                    },
+                    crosshair: {
+                        color: "#34495E",
+                        width: 1,
+                        visible: true,
+                        opacity: 0.5
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= series.name #: #= value #"
+                }
+
+            });
+        // alert('chart');
+    }
+
+     $(document).ready(function () {
+         CreateDiagram();
+     });
+
+    $(window).resize(CreateDiagram);
+    </script>
+
+}
+

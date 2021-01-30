@@ -1,0 +1,25 @@
+﻿@using ModelChecker.WEB.Models;
+@model StatusReportViewModel
+
+
+    <div class="d-flex flex-row table-footer font-weight-bold p-0 m-0  ">
+        <div class="fix-w-40  ml-1">
+
+        </div>
+        <div class="col-3 text-left text-uppercase p-2">
+            @Resources.Global.Total
+        </div>
+        <div class="fix-w-40">
+
+        </div>
+        @_Controls.QntCellRed(Html.DisplayFor(x => x.AtWorkClashesQnt), 0.001m, "font-weight-bold", "border-right border-left border-secondary-light")
+        @_Controls.QntCellRed(Html.DisplayFor(x => x.CreatedQnt), Model.CreatedQntPercDec)
+        @_Controls.QntCellRed(Html.DisplayFor(x => x.ActiveQnt), Model.ActiveQntPercDec)
+        @_Controls.QntCellGreen(Html.DisplayFor(x => x.AnalizedQnt), Model.AnalizedQntPercDec)
+        @_Controls.QntCellGreen(Html.DisplayFor(x => x.ConfirmedQnt), Model.ConfirmedQntPercDec)
+        @_Controls.QntCellGreen(Html.DisplayFor(x => x.CorrectedQnt), Model.CorrectedQntPercDec)
+        <div class="col p-2  border-right border-light">
+
+        </div>
+    </div>
+

@@ -1,0 +1,109 @@
+﻿
+@using ModelChecker.WEB.Models;
+@using ModelChecker.DTO;
+
+@model IEnumerable<ConstructionDTO>
+
+@{
+    ViewBag.AllQnt = Model.Sum(x => x.AtWorkClashesQnt);
+    Orders _orders = ViewBag.Orders;
+}
+
+<style>
+    .my-arrow {
+        display: none;
+    }
+
+    .my-cb:checked ~ label .my-arrow {
+        display: block !important;
+    }
+</style>
+
+<script>
+    function UpdateDashBoard() {
+        SubmitForm('UpdateDashBoardForm');
+    }
+</script>
+
+<!--FORMS SECTION-->
+<section class="d-none p-0">
+    @using (Ajax.BeginForm("CreateConstruction", null
+               , new AjaxOptions() { UpdateTargetId = "rightdialog", HttpMethod = "Get", LoadingElementId = "loading" }
+               , new { Id = $"CreateConstructionForm" })) { }
+
+    @using (Ajax.BeginForm("ConstructionList", null
+              , new AjaxOptions() { UpdateTargetId = "result", HttpMethod = "Get", LoadingElementId = "loading" }
+              , new { Id = $"UpdateForm" }))
+    {<button type="submit" class="d-none"></button>}
+
+    @using (Ajax.BeginForm("DashBoard", null
+           , new AjaxOptions() { UpdateTargetId = "dashboard", HttpMethod = "Get" }
+           , new { Id = $"UpdateDashBoardForm" }))
+    { <button class="d-none" type="submit"></button>}
+
+
+</section>
+
+<div id="dashboard" style="min-height:300px!important;">
+
+</div>
+
+<div class="d-flex flex-row table-header ">
+    <div class="fix-w-40 p-0  ml-1">
+        <button class="btn rounded-0  btn-light" type="submit" form="CreateConstructionForm"
+                data-toggle="modal" data-target="#rightModal">
+            +
+        </button>
+    </div>
+    <div class="col-3 d-flex flex-row p-0">
+        <div class="fix-w-40 pt-2 pl-2 ">
+            @_Controls.CustomCheckBox(0, true, "const", "", "CheckAll(this, 'constrlist');UpdateDashBoard();")
+        </div>
+        @_Controls.HeadCell(@Resources.Global.ConstructionName, "ConstructionName", Orders.Name, _orders, "col", "text-left", "border-0")
+    </div>
+   
+    <div class="fix-w-40">
+
+    </div>
+
+    @_Controls.HeadCell(@Resources.Global.Clashes, "Clashes", Orders.Clashes, _orders, border: "border-right border-left border-secondary-light")
+    @_Controls.HeadCell(@Resources.Global.StatusCreate, "StatusCreate", Orders.Create, _orders)
+    @_Controls.HeadCell(@Resources.Global.StatusActive, "StatusActive", Orders.Active, _orders)
+    @_Controls.HeadCell(@Resources.Global.StatusAnalized, "StatusAnalized", Orders.Analized, _orders)
+    @_Controls.HeadCell(@Resources.Global.StatusConfirmed, "StatusConfirmed", Orders.Confirmed, _orders)
+    @_Controls.HeadCell(@Resources.Global.StatusCorrected, "StatusCorrected", Orders.Corrected, _orders)
+    @_Controls.HeadCell(@Resources.Global.Date, "Date", Orders.Date, _orders)
+</div>
+
+<div id="constrlist">
+    @foreach (var item in Model.AsParallel().AsOrdered())
+    {
+        <section class="d-none p-0">
+            @using (Ajax.BeginForm("DeleteConstruction", new { Id = item.Id }
+                    , new AjaxOptions()
+                    {
+                        UpdateTargetId = "smalldialog",
+                        HttpMethod = "Post",
+                        LoadingElementId = "loading",
+                        Confirm = Resources.Global.RemoveConfirmMsg,
+                        OnComplete = "ShowModalSmall();UpdateResult();"
+                    }
+                    , new { Id = $"DeleteConstructionForm{item.Id}" })) { }
+
+            @using (Ajax.BeginForm("EditConstruction", new { Id = item.Id }
+               , new AjaxOptions() { UpdateTargetId = "rightdialog", HttpMethod = "Get", LoadingElementId = "loading" }
+               , new { Id = $"EditConstructionForm{item.Id}" })) { }
+        </section>
+        @Html.Partial("_ConstructionRow", (ConstructionViewModel)item)
+    }
+</div>
+@Html.Partial("_TotalRow", new StatusReportViewModel(Model))
+
+
+<script>
+    $(document).ready(function () {
+       
+        UpdateDashBoard();
+     });
+</script>
+

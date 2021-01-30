@@ -1,0 +1,14 @@
+﻿@using ModelChecker.DTO;
+
+@model IEnumerable<ConstructionDTO>
+
+@{ 
+    int selectedId = (int)ViewBag.SelectedId;
+}
+    <div class="d-flex flex-column p-2 bg-white">
+        <h6>Объекты</h6>
+        @foreach (var item in Model.AsParallel().AsOrdered())
+        {
+            @_Controls.FlatRadio(item, selectedId== item.Id, name:"constructionId")
+        }
+    </div>

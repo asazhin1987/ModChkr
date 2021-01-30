@@ -1,0 +1,36 @@
+﻿@using ModelChecker.WEB.Models;
+
+@model ConstructionViewModel
+
+
+@{
+    string labelclass = "control-label col-md-8  font-weight-bold ";
+    string editorclass = "col-md-12";
+}
+
+@using (Ajax.BeginForm("MergeConstruction", "Server"
+        , new AjaxOptions() { UpdateTargetId = "rightdialog", HttpMethod = "Post", LoadingElementId = "locloading" }
+        , new { Id = "SubmitForm" }))
+{
+
+    <input name="Id" value="@Model.Id" class="d-none" />
+
+    <div class="form-group  ">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = labelclass })
+        <div class="@editorclass">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group  ">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = labelclass })
+        <div class="@editorclass">
+            @Html.TextAreaFor(model => model.Description, rows: 4, columns: 10, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+}
+
+@_Controls.SaveCancelButtons()

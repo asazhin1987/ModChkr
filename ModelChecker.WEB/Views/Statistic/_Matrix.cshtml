@@ -1,0 +1,88 @@
+﻿@using ModelChecker.WEB.Models;
+@using ModelChecker.WEB.Util;
+
+@model MatrixViewModel
+
+<style>
+    #datesfilter {
+        display: none !important;
+    }
+
+    #result {
+        overflow: auto;
+        width: calc( 100vw - 270px);
+        height: calc( 100vh - 110px);
+    }
+
+    .my-header {
+        height: 160px !important;
+        font-size: 12pt !important;
+    }
+
+    .my-rotate {
+        writing-mode: vertical-rl;
+        text-orientation:sideways-right;
+        transform: rotate(-180deg);
+        /*word-break: break-all;*/
+    }
+
+    .my-left {
+        width: 280px !important;
+    }
+</style>
+
+
+@if (Model.HasItems)
+{
+    /*Table head*/
+    <div class="d-inline-flex flex-row table-header my-header" style="top:0!important;min-width:100%;">
+        <div class="corner my-left bg-white  d-flex flex-row">
+            <div class="col p-0 d-flex flex-column">
+                <h5 class="col pl-2 m-0">@Model.DementionName</h5>  
+                <p class="font-weight-bold pl-2 pb-2 m-0"   style="font-size:10pt;">@Resources.Global.CheckA</p>
+            </div>
+            <div class="fix-w-40 text-left my-rotate p-2 font-weight-bold"  style="font-size:10pt;">
+                @Resources.Global.CheckB
+            </div>
+        </div>
+        @foreach (MatrixDemention right in Model.RightDementions.AsParallel().AsOrdered())
+        {
+            <div class="fix-w-70 border-right text-left p-2 my-rotate " style="font-size:10pt;">
+                @right.DisplayName
+            </div>
+        }
+    </div>
+    /*body*/
+    foreach (MatrixDemention left in Model.LeftDementions.AsParallel().AsOrdered())
+    {
+        <div class="d-inline-flex flex-row border-bottom bg-white p-0 m-0" style="top:0!important;min-width:100%;">
+            <div class="fixed-left my-left bg-white d-flex flex-row p-0">
+                <div class="col p-2"  style="font-size:10pt;">
+                    @left.DisplayName
+                </div>
+                @*<div class="fix-w-40">
+                    
+                </div>*@
+                
+            </div>
+           
+            @foreach (MatrixDemention right in Model.RightDementions.AsParallel().AsOrdered())
+            {
+                var _items = Model.Matrix.Where(x => x.LeftId == left.Id && x.RightId == right.Id);
+                int qnt = _items.Sum(x => x.Qnt);
+                string bg = qnt == 0 ? "#f8f9fa; color:rgb(244,244,244);" : $"rgba(220, 53, 69, { PageHelper.GetOpacity(qnt, Model.ItemsCount)}";
+                <div class="fix-w-70 border-right text-center p-2 m-0">
+                    <span class="p-1 text-center m-0 d-inline-block w-100" style="font-size:10pt; background-color:@bg">@qnt.ToString($"{0:N0}")</span>
+                </div>
+            }
+        </div>
+    }
+
+}
+else
+{
+    <div class="container-fluid m-3">
+        <h2 class="text-center">@Resources.Global.NullCollection</h2>
+    </div>
+}
+

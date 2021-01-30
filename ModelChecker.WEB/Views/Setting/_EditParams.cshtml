@@ -1,0 +1,27 @@
+﻿@using ModelChecker.WEB.Models;
+
+@model ParamsViewModel
+
+
+@using (Ajax.BeginForm("EditParams", null
+           , new AjaxOptions() { UpdateTargetId = "results", HttpMethod = "Post", LoadingElementId = "loading" }
+           , new { Id = $"EditForm" }))
+{
+
+    @Html.DisplayNameFor(x => x.Delimiter)
+    @Html.EditorFor(x => x.Delimiter, new { htmlAttributes = new { @class = "form-control mb-2" } })
+    @Html.ValidationMessageFor(x => x.Delimiter, "", new { @class = "text-danger" })
+
+   
+    @Html.DisplayNameFor(x => x.DatRetentionPeriod)
+    @Html.EditorFor(x => x.DatRetentionPeriod, new { htmlAttributes = new { @class = "form-control " } })
+    @Html.ValidationMessageFor(x => x.DatRetentionPeriod, "", new { @class = "text-danger" })
+}
+
+<div class="d-flex flex-row mt-2 p-1">
+    <button type="submit" form="UpdateForm" class="btn btn-light rounded-0 col-3 mr-1">@Resources.Global.Cancel</button>
+    <button type="submit" form="EditForm" class="btn btn-secondary rounded-0  col-3">@Resources.Global.Save</button>
+</div>
+
+
+

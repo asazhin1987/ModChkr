@@ -1,0 +1,31 @@
+﻿@using ModelChecker.WEB.Models;
+
+@model ParamsViewModel
+
+@{
+    ViewBag.Title = Resources.Menu.Params;
+}
+<!--FORMS SECTION-->
+<section class="d-none p-0">
+
+
+    @using (Ajax.BeginForm("ParamsPartial", null
+              , new AjaxOptions() { UpdateTargetId = "results", HttpMethod = "Get", LoadingElementId = "loading" }
+              , new { Id = $"UpdateForm" }))
+    {<button type="submit" class="d-none"></button>}
+</section>
+
+<div class="container">
+    <div class="p-3 bg-light shadow-sm mt-5">
+        <div class="col-auto  text-light-green p-0 align-self-center" style="font-size:20pt;">
+            @Resources.Global.Setting
+        </div>
+        <br />
+
+        <div id="results">
+            @Html.Partial("_Params", Model)
+        </div>
+    </div>
+
+</div>
+

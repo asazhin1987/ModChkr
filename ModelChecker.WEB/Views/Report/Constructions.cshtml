@@ -1,0 +1,15 @@
+﻿
+@using ModelChecker.DTO;
+@model IEnumerable<ConstructionDTO>
+
+@{
+    ViewBag.Title = Resources.Menu.Constructions;
+}
+
+
+
+<div class="d-flex flex-row p-0">
+    <div class="col d-flex flex-column" id="result">
+        @Html.Partial("_ConstructionList", Model)
+    </div>
+</div>

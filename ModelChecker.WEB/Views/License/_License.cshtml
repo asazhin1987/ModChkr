@@ -1,0 +1,34 @@
+﻿@using ModelChecker.WEB.Models;
+
+@model LicenseReportViewModel
+
+
+
+
+
+<!--head caption-->
+<div id="results" class="d-flex flex-row bg-white mb-2 shadow-sm">
+    @Html.Partial("_LicenseResult", Model.License)
+</div>
+<div class="d-flex flex-row p-0 shadow-sm bg-white mb-2" style="height:200px;" id="diagramcontainer">
+    <div class="col-2 border-right border-light p-2">
+        <h5 class="text-secondary text-center m-0 p-0 ">@Resources.Global.LicenseQnt</h5>
+        <div class="text-center m-0 p-0" style="font-size:48pt;">
+            @Model.AllQnt
+        </div>
+        <p class="text-secondary m-0 p-0 text-center">@Resources.Global.NowCapt</p>
+    </div>
+    <div class="col-2 border-right border-light p-2">
+        <h5 class="text-secondary text-center m-0 p-0 ">@Resources.Global.LicenseUsedQnt</h5>
+        <div class="text-center m-0 p-0" style="font-size:48pt;">
+            @Model.UsingQnt
+        </div>
+        <p class="text-secondary m-0 p-0 text-center">@Model.Last3MonthsQnt (@Resources.Global.Last3MonthsCapt)</p>
+    </div>
+    <div class="col">
+        @Html.Partial("_LicenseDiagram", new LicenseMonthsDiagramViewModel(Model.LicenseUsings, Model.License.LicensseQnt))
+    </div>
+</div>
+<div class="col p-0" id="tablecontainer">
+    @Html.Partial("_TableUse", Model.Licenses)
+</div>

@@ -1,0 +1,46 @@
+﻿@using ModelChecker.WEB.Models;
+@using ModelChecker.WEB.Util;
+
+@model ConstructionViewModel
+
+@{
+    string csscell = " p-2 border-right border-light text-center ";
+    int all = ViewBag.AllQnt;
+    string cbId = $"cons{Model.Id}";
+}
+
+    <div class="d-flex flex-row border-bottom p-0">
+        <button class=" btn rounded-0 remove-btn m-0 p-0 fix-w-40 ml-1" type="submit" form="@( $"DeleteConstructionForm{Model.Id}")">
+
+        </button>
+        <div class="col-3 d-flex flex-row p-0">
+            <div class=" fix-w-40 pt-1 pl-2">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input"
+                           id="@cbId" name="ConstructionIds" onchange="ChangeChackAll('constrlist', 'const0'); UpdateDashBoard();" value="@Model.Id" checked='checked' form="UpdateDashBoardForm">
+                    <label class="custom-control-label" for="@cbId"></label>
+                </div>
+            </div>
+           
+            <div class="col p-0 m-0" style="padding-top:3px!important;">
+                <label class="p-0 m-0" for="@cbId">@Html.DisplayFor(x => x.Name)</label>
+                <p class="p-0 m-0 " style="font-size:10pt;">@Html.DisplayFor(x => x.Description)</p>
+            </div>
+
+        </div>
+        <button class="fix-w-40 rounded-0 btn p-2 btn-light " type="submit" form="@($"EditConstructionForm{Model.Id}")"
+                data-toggle="modal" data-target="#rightModal">
+            ...
+        </button>
+        @_Controls.QntCellRed(Html.DisplayFor(x => x.AtWorkClashesQnt), @PageHelper.GetPercDec(Model.AtWorkClashesQnt, all), "font-weight-bold", "border-right border-left border-secondary-light")
+        @_Controls.QntCellRed(Html.DisplayFor(x => x.CreatedQnt), Model.CreatedQntPercDec)
+        @_Controls.QntCellRed(Html.DisplayFor(x => x.ActiveQnt), Model.ActiveQntPercDec)
+        @_Controls.QntCellGreen(Html.DisplayFor(x => x.AnalizedQnt), Model.AnalizedQntPercDec)
+        @_Controls.QntCellGreen(Html.DisplayFor(x => x.ConfirmedQnt), Model.ConfirmedQntPercDec)
+        @_Controls.QntCellGreen(Html.DisplayFor(x => x.CorrectedQnt), Model.CorrectedQntPercDec)
+
+        <div class="@csscell  col  text-break" style="font-size:10pt;text-align:center!important;">
+            @Html.DisplayFor(x => x.Date)
+        </div>
+    </div>
+

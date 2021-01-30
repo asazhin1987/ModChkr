@@ -1,0 +1,103 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfStyles">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Brushes.xaml"/>
+        <ResourceDictionary Source="Fonts.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+
+    <Style x:Key="GrayTextWOBackBox" TargetType="TextBox" >
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource TextGray}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <ControlTemplate x:Key="AddCommentTextBoxTemplate" TargetType="{x:Type TextBoxBase}">
+        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                Background="{TemplateBinding Background}" SnapsToDevicePixels="True" CornerRadius="0,3,3,0">
+            <Grid>
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="False" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                              HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="4,0"/>
+                <Label Name="PART_Label" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding Control.FontSize}" 
+                       FontWeight="{TemplateBinding FontWeight}" Content="Ответить"
+                       IsHitTestVisible="False" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="{TemplateBinding Control.Padding}">
+                    <Label.Foreground>
+                        <SolidColorBrush Color="{StaticResource TextGrayColor}" Opacity="0" />
+                    </Label.Foreground>
+                </Label>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="TextBox.Text" Value="" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter TargetName="PART_Label" Property="Control.Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource TextGrayColor}" Opacity="1" />
+                        </Setter.Value>
+                    </Setter>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="AddCommentTextBox" TargetType="TextBox" >
+        <Setter Property="BorderThickness" Value="0,1.5,1.5,1.5"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource TextGray}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TextGray}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="Template" Value="{StaticResource AddCommentTextBoxTemplate}"/>
+    </Style>
+
+    <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+        <Border x:Name="border" 
+                BorderThickness="0, 0, 0, 1" 
+                BorderBrush="#d0d0d0"
+                Background="{TemplateBinding Background}" 
+                SnapsToDevicePixels="True"
+                CornerRadius="3">
+            <ScrollViewer x:Name="PART_ContentHost" 
+                          Focusable="False"
+                          HorizontalScrollBarVisibility="Hidden" 
+                          VerticalScrollBarVisibility="Hidden"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" 
+                     Value="False">
+                <Setter Property="Background" 
+                        TargetName="border" 
+                        Value="{DynamicResource DisabledBoxBackground}"/>
+                <Setter Property="BorderThickness" 
+                        TargetName="border" 
+                        Value="0"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <Style x:Key="TextBoxA" TargetType="TextBox">
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="MinHeight" Value="32"/>
+        <Setter Property="Padding" Value="10,0,10,0"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Foreground" Value="{StaticResource TextGray}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="Template" Value="{StaticResource TextBoxBaseControlTemplate}"/>
+    </Style>
+</ResourceDictionary>

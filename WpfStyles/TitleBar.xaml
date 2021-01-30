@@ -1,0 +1,233 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfStyles">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Brushes.xaml"/>
+        <ResourceDictionary Source="Fonts.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="Button" x:Key="TitleButton">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource MouseEnter_Red}" Opacity="0"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Foreground" Value="{StaticResource LightGrayBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.01" Storyboard.TargetName="PART_Border"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Opacity)"
+                                                 To="1">
+                                        </DoubleAnimation>
+                                        <ColorAnimation BeginTime="0:0:0.01" Duration="0:0:0.3" Storyboard.TargetName="PART_Border"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{DynamicResource MouseDown_Red}">
+                                        </ColorAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.3" Storyboard.TargetName="PART_Border"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Opacity)"
+                                                 To="1">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.3" Storyboard.TargetName="PART_Border"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Opacity)"
+                                                 To="0">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Path x:Name="PART_x" 
+                  Data="M 0,0 2,2 z M 2,0 0,2 z" 
+                  Fill="{TemplateBinding Foreground}" 
+                  Stretch="UniformToFill" 
+                  SnapsToDevicePixels="True" 
+                  Stroke="{TemplateBinding Foreground}" 
+                  StrokeThickness="4" 
+                  UseLayoutRounding="True" 
+                  VerticalAlignment="Center"
+                  RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Border>
+                    <!--<ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource LightGrayBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource MouseEnter_Red}"/>
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource LightGrayBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource MouseDown_Red}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>-->
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="MinimizeButton">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource BimGreen}" Opacity="0"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Foreground" Value="{StaticResource LightGrayBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.01" Storyboard.TargetName="PART_Border"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Opacity)"
+                                                 To="1">
+                                        </DoubleAnimation>
+                                        <ColorAnimation BeginTime="0:0:0.01" Duration="0:0:0.3" Storyboard.TargetName="PART_Border"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                 To="{DynamicResource MouseDown_Red}">
+                                        </ColorAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.3" Storyboard.TargetName="PART_Border"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Opacity)"
+                                                 To="1">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.3" Storyboard.TargetName="PART_Border"
+                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Opacity)"
+                                                 To="0">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Path x:Name="PART_x" 
+                              Margin="25,0"
+                  Data="M 0,0 2,0 z" 
+                  Fill="{TemplateBinding Foreground}" 
+                  Stretch="UniformToFill" 
+                  SnapsToDevicePixels="True" 
+                  Stroke="{TemplateBinding Foreground}" 
+                  StrokeThickness="4" 
+                  UseLayoutRounding="True" 
+                  VerticalAlignment="Center"
+                  RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Border>
+                    <!--<ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource LightGrayBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource MouseEnter_Red}"/>
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource LightGrayBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource MouseDown_Red}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>-->
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:TitleBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TitleBar}">
+                    <Border Name="TitleBar" DockPanel.Dock="Top" 
+               Background="#34495E"  
+               CornerRadius="0,0,0,0"  >
+                        <Grid Height="32" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="18"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Name="PART_MinimizeButtonColumn" Width="0"/>
+                                <ColumnDefinition Width="62"/>
+                            </Grid.ColumnDefinitions>
+                            <!--
+              <Image Grid.Column="0" Name="Icon" Source="{Binding Path=Icon, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                     HorizontalAlignment="Right" Margin="5,0,0,0" Width="16" Height="16" #1ABC9C/>-->
+                            <TextBlock Grid.Column="1" Name="Caption" Foreground="White"  HorizontalAlignment="Left" 
+                                       VerticalAlignment="Center" Margin="5,0,0,0"
+                         FontFamily="{StaticResource Roboto}" FontSize="15" FontWeight="Regular" 
+                                       Text="{Binding Path=Title, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                            <!--Click="MinButton_MouseLeftButtonDown" />-->
+                            <!--Click="MaxButton_MouseLeftButtonDown" />-->
+                            <!--
+              <local:ImageButton Grid.Column="2" x:Name="MinButton" 
+                  ImageNormal="../images/min.png" 
+                  ImageOver="../images/minhot.png" 
+                  ImageDown="../images/minpressed.png" Width="25" Height="25" />
+             
+
+              <local:ImageButton Grid.Column="3" x:Name="MaxButton" 
+                   ImageNormal="../images/max_n.png" 
+                   ImageOver="../images/maxhot_n.png" 
+                   ImageDown="../images/maxpressed_n.png" Width="25" Height="25" />-->
+
+
+                            <Button Grid.Column="2" x:Name="MinimizeButton" HorizontalAlignment="Left"
+                     Width="62" Height="32" Style="{StaticResource MinimizeButton}"/>
+                            <Button Grid.Column="3" x:Name="CloseButton" HorizontalAlignment="Left"
+                     Width="62" Height="32" Style="{StaticResource TitleButton}"/>
+                            <!--    Click="CloseButton_MouseLeftButtonDown" />  ImageOver="../images/closehot_n.png" 
+              ImageDown="../images/closepressed_n.png" "../images/close_n.png" Width="14" Height="14" -->
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="MinimizeButton" Value="true">
+                            <Setter TargetName="PART_MinimizeButtonColumn" Property="Width" Value="62"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

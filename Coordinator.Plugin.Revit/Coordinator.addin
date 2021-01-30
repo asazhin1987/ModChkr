@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Bim Manager</Name>
+    <Assembly>BIMACAD\BIMCoordinator\Coordinator.Plugin.Revit.dll</Assembly>
+    <ClientId>f7e78c3b-21a3-4700-9eee-d4852f2889d1</ClientId>
+    <FullClassName>Coordinator.Plugin.Revit.Application</FullClassName>
+    <Text>BimCoordinator</Text>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>BIMA</VendorId>
+    <VendorDescription>Bim Academy LLC, bimacad.ru</VendorDescription>
+  </AddIn>
+</RevitAddIns>

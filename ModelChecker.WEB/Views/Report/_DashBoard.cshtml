@@ -1,0 +1,12 @@
+﻿@using ModelChecker.WEB.Models;
+@model StatusDashBoardViewModel
+
+    <div class="d-flex  flex-row">
+        <div class="col" id="diagram" style="height:300px;">
+            @Html.Partial("~/Views/Statistic/_Chart.cshtml", Model.Slices)
+        </div>
+        <div class="" style="min-width:300px;height:300px;" id="pipe">
+            @Html.Partial("~/Views/Statistic/_Pipe.cshtml", Model.StatusPipe)
+        </div>
+       
+    </div>

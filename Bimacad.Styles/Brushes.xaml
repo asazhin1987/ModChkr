@@ -1,0 +1,89 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+	<Color x:Key="WindowBackgroundColor">#ECF0F1</Color>
+	<Color x:Key="TextGrayColor">#34495E</Color>
+	<Color x:Key="TextGreenColor">#1ABC9C</Color>
+	<Color x:Key="BimGreen">#1ABC9C</Color>
+	<Color x:Key="ComboWhite">#FFFFFF</Color>
+	<Color x:Key="ComboOver">#DDDDDD</Color>
+	<Color x:Key="ComboDown">#999999</Color>
+	<Color x:Key="ComboDisabled">#E5EAEB</Color>
+	<Color x:Key="ComboForegroundDisabled">#84919E</Color>
+	<Color x:Key="MouseEnter_Red">#E74C3C</Color>
+	<Color x:Key="MouseDown_Red">#C0392B</Color>
+	<Color x:Key="LightGray">#bdc3c7</Color>
+	<Color x:Key="TitleBarBackground">#FF34495E</Color>
+	<Color x:Key="DataGridHeaderBackground">#FFD7DBDE</Color>
+	<Color x:Key="DataGridRowBackground">#FFE8EBED</Color>
+	<Color x:Key="DataGridRowAltBackground">#FFE4E8EA</Color>
+	<Color x:Key="DataGridRowBackgroundDark">#FFDEE2E4</Color>
+	<Color x:Key="DataGridRowAltBackgroundDark">#FFDCDEE1</Color>
+
+	<Color x:Key="color1">#FFB74D</Color>
+	<Color x:Key="color3">#464646</Color>
+	<Color x:Key="color4">#464646</Color>
+	<Color x:Key="color5">#ecf0f1</Color>
+	<Color x:Key="color6">#FFA92B</Color>
+	<Color x:Key="color7">#1b9581</Color>
+	<Color x:Key="color8">#425E7B</Color>
+	<Color x:Key="color9">#2C3E50</Color>
+	<Color x:Key="color10">#F4F4F4</Color>
+	<Color x:Key="color11">#95989A</Color>
+	<Color x:Key="color12">#797979</Color>
+	<Color x:Key="color13">#D3D3D3</Color>
+	<Color x:Key="cdisab">#aaaaaa</Color>
+	<Color x:Key="www">#FFFFFF</Color>
+
+
+	<SolidColorBrush x:Key="MainColor" Color="{StaticResource color1}" />
+	<SolidColorBrush x:Key="Gray1" Color="{StaticResource color3}" />
+	<SolidColorBrush x:Key="Gray2" Color="{StaticResource color4}" />
+	<SolidColorBrush x:Key="Gray3" Color="{StaticResource color5}" />
+	<SolidColorBrush x:Key="MouseEnter" Color="{StaticResource color6}" />
+	<SolidColorBrush x:Key="MouseDown" Color="{StaticResource color7}" />
+	<SolidColorBrush x:Key="MouseEnterDark" Color="{StaticResource color8}" />
+	<SolidColorBrush x:Key="MouseDownDark" Color="{StaticResource color9}" />
+	<SolidColorBrush x:Key="ForegroundColor" Color="{StaticResource color10}" />
+	<SolidColorBrush x:Key="BorderGray1" Color="{StaticResource color13}" />
+	<SolidColorBrush x:Key="disab" Color="{StaticResource cdisab}" />
+	<SolidColorBrush x:Key="cb_color" Color="White" />
+
+	<SolidColorBrush x:Key="LightGrayBrush" Color="#ffffff" Opacity="0.9"/>
+
+	<SolidColorBrush x:Key="GreenText" Color="{StaticResource TextGreenColor}" Opacity="1" />
+	<SolidColorBrush x:Key="TextGray" Color="{StaticResource TextGrayColor}" Opacity="1" />
+	<SolidColorBrush x:Key="TextGrayFaded" Color="{StaticResource TextGrayColor}" Opacity="0.7" />
+	<SolidColorBrush x:Key="TextGrayFadedA" Color="{StaticResource TextGrayColor}" Opacity="0.4" />
+	<SolidColorBrush x:Key="TextGrayFaded03" Color="{StaticResource TextGrayColor}" Opacity="0.3" />
+	<SolidColorBrush x:Key="TextGrayFadedB" Color="{StaticResource TextGrayColor}" Opacity="0.2" />
+	<SolidColorBrush x:Key="DisabledGray" Color="{StaticResource TextGrayColor}" Opacity="0.1" />
+
+	<SolidColorBrush x:Key="TransparentWhite" Color="#ffffff" Opacity="0.3" />
+	<SolidColorBrush x:Key="TransparentDark" Color="#000000" Opacity="0.3" />
+	<SolidColorBrush x:Key="TransparentDarker" Color="#000000" Opacity="0.6" />
+
+	<SolidColorBrush x:Key="WindowBackground" Color="{StaticResource WindowBackgroundColor}" Opacity="1" />
+	<SolidColorBrush x:Key="MainGreen" Color="{StaticResource BimGreen}" Opacity="1" />
+	<SolidColorBrush x:Key="TransparentGreen" Color="{StaticResource BimGreen}" Opacity="0.2" />
+	<SolidColorBrush x:Key="TitleBarBackgroundBrush" Color="{StaticResource TitleBarBackground}" Opacity="1" />
+	<SolidColorBrush x:Key="MouseEnterRedBrush" Color="{StaticResource MouseEnter_Red}" Opacity="1" />
+	<SolidColorBrush x:Key="MouseDownRedBrush" Color="{StaticResource MouseDown_Red}" Opacity="1" />
+	<SolidColorBrush x:Key="ForegroundColorDark" Color="{StaticResource TextGrayColor}" />
+	<SolidColorBrush x:Key="ComboBoxBack" Color="{StaticResource ComboWhite}" Opacity="1" />
+	<SolidColorBrush x:Key="ComboBoxBack_MouseOver" Color="{StaticResource ComboWhite}" Opacity="1" />
+	<SolidColorBrush x:Key="ComboBoxBack_MouseDown" Color="{StaticResource ComboWhite}" Opacity="1" />
+	<RadialGradientBrush x:Key="ButtonGrad" GradientOrigin="60,16" RadiusX="120" RadiusY="32">
+		<RadialGradientBrush.GradientStops>
+			<GradientStop Color="#D4D9DC" Offset="0" />
+			<GradientStop Color="#A8B6BE" Offset="1" />
+		</RadialGradientBrush.GradientStops>
+	</RadialGradientBrush>
+	<SolidColorBrush x:Key="DisabledBoxBackground" Color="{StaticResource ComboDisabled}" Opacity="1" />
+	<SolidColorBrush x:Key="DataGridHeader" Color="{StaticResource DataGridHeaderBackground}" Opacity="1" />
+	<SolidColorBrush x:Key="DataGridRow" Color="{StaticResource DataGridRowBackground}" Opacity="1" />
+	<SolidColorBrush x:Key="DataGridRowAlt" Color="{StaticResource DataGridRowAltBackground}" Opacity="1" />
+	<SolidColorBrush x:Key="DataGridRowDark" Color="{StaticResource DataGridRowBackgroundDark}" Opacity="1" />
+	<SolidColorBrush x:Key="DataGridRowAltDark" Color="{StaticResource DataGridRowAltBackgroundDark}" Opacity="1" />
+</ResourceDictionary>
