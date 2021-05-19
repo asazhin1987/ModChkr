@@ -1,0 +1,111 @@
+﻿<Window x:Class="ConnectionSetting.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ConnectionSetting"
+		xmlns:my="clr-namespace:WpfStyles;assembly=WpfStyles"
+        mc:Ignorable="d"
+        Title="ConnectionString Setting" Height="600" Width="800"
+		Style="{DynamicResource BIMAcadStyle}" ResizeMode="CanResize">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/WpfStyles;component/Core.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<Style x:Key="{x:Type Button}" TargetType="{x:Type Button}" BasedOn="{StaticResource OkButton}" />
+			<Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource CheckBoxC}">
+				<Setter Property="IsChecked" Value="False"/>
+				<Setter Property="Margin" Value="10,6"/>
+				<Setter Property="FontSize" Value="14"/>
+				<Setter Property="FontWeight" Value="Light"/>
+			</Style>
+			<Style x:Key="{x:Type ToggleButton}" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonB}"/>
+			<Style x:Key="{x:Type TextBlock}" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource GrayGeneralBlock}"/>
+			<my:BoolToVisibilityConverter x:Key="boolToVis"/>
+			<my:GridLengthConverter x:Key="DoubleToGrid"/>
+			<my:BindingProxy x:Key="proxy" Data="{Binding}" />
+		</ResourceDictionary>
+	</Window.Resources>
+
+	<Grid Margin="8"> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="40"></RowDefinition>
+		</Grid.RowDefinitions>
+		<!--Top Panel-->
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition Width="30"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="{Binding FilePath}" VerticalAlignment="Center"></TextBlock>
+			<Button Grid.Column="1" Command="{Binding GetFilePathCommand}"
+					Style="{StaticResource SettingsButton}" ></Button>
+		</Grid>
+		<!--Setting body-->
+		<Grid  Grid.Row="1" IsEnabled="{Binding HasConfig}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<StackPanel Grid.Column="0" Orientation="Vertical">
+				<ToggleButton Name="DistanceButton" Height="40" Content="LocalHost" IsChecked="{Binding Connection.LocalHost}" />
+				<ToggleButton Name="CreationDateButton" Height="40" Content="LocalDB" IsChecked="{Binding Connection.LocalDB}"/>
+				<ToggleButton Name="ChangeDateButton" Height="40" Content="SqlSerevr" IsChecked="{Binding Connection.SqlSerevr}"/>
+			</StackPanel>
+			<StackPanel Grid.Column="1" Orientation="Vertical" >
+				<StackPanel Orientation="Vertical" >
+					<TextBlock>Connection Name</TextBlock>
+					<TextBox Text="{Binding Connection.ConnectionName, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TextBoxA}"
+							 IsEnabled="{Binding ConnectionNameVisible}"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Vertical" >
+					<TextBlock>Server Name</TextBlock>
+					<TextBox Text="{Binding Connection.ServcerName, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TextBoxA}"
+							 IsEnabled="{Binding ServerNameVisible}"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Vertical">
+					<TextBlock>Database Name</TextBlock>
+					<TextBox Text="{Binding Connection.DataBaseName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxA}"
+							 IsEnabled="{Binding DatabaseNameVisible}"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Vertical">
+					<TextBlock>Database File Path</TextBlock>
+					<TextBox Text="{Binding Connection.DataBasePath, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxA}"
+							 IsEnabled="{Binding DatabasePathVisible}"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Vertical">
+					<TextBlock>User</TextBlock>
+					<TextBox Text="{Binding Connection.UserName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxA}"
+							 IsEnabled="{Binding UserNameVisible}"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Vertical">
+					<TextBlock>Password</TextBlock>
+					<TextBox Text="{Binding Connection.Password, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxA}"
+							 IsEnabled="{Binding PasswordVisible}"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Vertical">
+					<TextBlock>Connection String</TextBlock>
+					<TextBox Text="{Binding ConnectionStr}" Style="{StaticResource TextBoxA}"
+							 IsEnabled="False"></TextBox>
+				</StackPanel>
+				<TextBlock  Grid.Row="2" Text="{Binding ResultMessage}" Margin="0,4" >
+
+				</TextBlock>
+			</StackPanel>
+			
+		</Grid>
+		
+
+		<!--Bottom Commands-->
+		<Grid Grid.Row="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition Width="auto"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Button Grid.Column="1" Command="{Binding SaveConfigCommand}" IsEnabled="{Binding HasConfig}">SAVE</Button>
+		</Grid>
+	</Grid>
+</Window>

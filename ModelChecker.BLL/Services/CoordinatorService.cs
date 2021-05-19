@@ -266,6 +266,7 @@ namespace ModelChecker.BLL.Services
 			//проверяем есть ли лицензия
 			var lic = db.License.Get(0);
 			if (lic == null)
+
 				throw new FaultException<NullKey>(new NullKey());
 
 			(DateTime? date, int qnt) = GetLicenseParamsAsync(lic.Key);

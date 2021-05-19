@@ -26,13 +26,6 @@ function CheckAll(e, block) {
     }
 }
 
-//function CheckAllRefresh(e, block) {
-//    CheckAll(e, block);
-//    if (e.checked == true) {
-//        UpdateChild();
-//    }
-    
-//}
 
 function ChangeChackAll(block, parent) {
     var _par = document.getElementById(parent);

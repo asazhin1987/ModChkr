@@ -13,9 +13,9 @@
 				<ResourceDictionary Source="pack://application:,,,/WpfStyles;component/Core.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 			<Style x:Key="{x:Type Button}" TargetType="{x:Type Button}" BasedOn="{StaticResource OkButton}" />
-			<Style x:Key="{x:Type ToggleButton}" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonB}">
-				
-			</Style>
+			<Style x:Key="{x:Type ToggleButton}" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonB}"/>
+
+
 			<Style x:Key="{x:Type DataGrid}" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource DataGridA}">
 				<Setter Property="ColumnHeaderStyle">
 					<Setter.Value>
