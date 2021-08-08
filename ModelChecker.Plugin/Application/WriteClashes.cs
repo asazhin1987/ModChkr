@@ -54,8 +54,8 @@ namespace ModelChecker
 			try
 			{
 				SetService(CheckHost());
-				if (src.CheckLicense() == false)
-					throw new Exception("Лицензия недействительна");
+				//if (src.CheckLicense() == false)
+				//	throw new Exception("Лицензия недействительна");
 				determ = src.GetDelimiter();
 				//создание модели
 				model = new ClashMasterViewModel(
@@ -136,45 +136,44 @@ namespace ModelChecker
 			{
 				DateTime odate = DateTime.Now;
 				//WriteParans();
-				Log("======================================================Start===================================");
+				//Log("======================================================Start===================================");
 				IEnumerable<ClashTest> navisChecks = GetChecks(model.SelectedChecks).ToList();
 				int constructionId = model.SelectedConstruction.Id;
-				Log("Get Checks Complete");
+				//Log("Get Checks Complete");
 				//сравнить проверки, присвоить ид
 				IEnumerable<FullCheckDTO> checks = src.MergeChecks(GetChecks(navisChecks, constructionId, odate).ToList(), constructionId).Where(x => x.Id > 0).ToList();
-				Log("Merge Checks Complete");
+				//Log("Merge Checks Complete");
 				//получение клешей
 				IEnumerable<ClashDTO> clashes = GetClashes(navisChecks, constructionId).ToList();
 				IEnumerable<ClashDTO> _clashes = clashes.Where(x => x.RevitElement1Id > 0 && x.RevitElement2Id > 0).ToList();
-				Log("Get Clashes complete: " + _clashes.Count() + " All: " + clashes.Count());
+				//Log("Get Clashes complete: " + _clashes.Count() + " All: " + clashes.Count());
 
 				//сравнить файлы, присвоить ид
 				var _modls = GetRevitModels(_clashes).ToList();
 				IEnumerable<RevitModelDTO> models = src.MergeModels(_modls);
-				Log("Merge Models Complete");
+				//Log("Merge Models Complete");
 
 				//сравнить категории, присвоить ид
 				var _cats = GetCategories(_clashes).ToList();
 				IEnumerable<RevitCategoryDTO> cats = src.MergeCategories(_cats);
-				Log("Merge Categories Complete");
+				//Log("Merge Categories Complete");
 
 				//сравнить элементы, присвоить ид
 				IEnumerable<RevitElementDTO> elems = GetElements(_clashes, models, cats).ToList();
 				MergeElements(ref elems);
-				Log("Merge Elements Complete");
+				//Log("Merge Elements Complete");
 				//mega join получение ид
 				IEnumerable<ClashDTO> resuleClashes = GetClashes(_clashes, elems, checks, odate);
-				Log($"GetClashes Complete.Count = {resuleClashes.Count()}");
+				//Log($"GetClashes Complete.Count = {resuleClashes.Count()}");
 				//сравнить конфликты
 				int r = MergeClashes(resuleClashes);
-				Log("Merge Clashes Complete");
+				//Log("Merge Clashes Complete");
 				//обновить старые статусы
 				SetNotFoundClashes(checks, odate);
-				Log("SetNotFoundClashes Complete");
+				//Log("SetNotFoundClashes Complete");
 				//дата объекта
 				src.SetConstructionDate(constructionId, odate);
-				Log("Set Construction Date Complete");
-				//src.SetNotFoundClashStatuses(checks.Select(x => x.Id).ToList(), odate);
+				//Log("Set Construction Date Complete");
 				Inform($"Загрузка завершена. Ошибок: {r}");
 
 

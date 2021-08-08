@@ -17,7 +17,7 @@ namespace ModelChecker.SRC.Factories
 			{
 				BasicHttpBinding binding = new BasicHttpBinding()
 				{
-					MaxReceivedMessageSize = 2147483647, CloseTimeout = closeTimeout ?? new TimeSpan(0, 2, 0)
+					MaxReceivedMessageSize = 2147483647, CloseTimeout = closeTimeout ?? new TimeSpan(0, 5, 0)
 				};
 
 				ChannelFactory = new ChannelFactory<T>(binding, new EndpointAddress(new Uri(URL)));

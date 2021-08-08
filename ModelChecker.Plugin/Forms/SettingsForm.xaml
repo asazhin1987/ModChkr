@@ -7,7 +7,7 @@
 			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              Style="{DynamicResource BimTaskWindow}"
-             Height="250" Width="400" 
+             Height="250" Width="400"  MinHeight="250" MinWidth="400"
 			 WindowStartupLocation="CenterScreen" >
 	<Window.Resources>
 		<ResourceDictionary>

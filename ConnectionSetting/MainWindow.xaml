@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ConnectionSetting"
 		xmlns:my="clr-namespace:WpfStyles;assembly=WpfStyles"
         mc:Ignorable="d"
-        Title="ConnectionString Setting" Height="600" Width="800"
+        Title="ConnectionString Setting" Height="600" Width="800" MinHeight="600" MinWidth="800"
 		Style="{DynamicResource BIMAcadStyle}" ResizeMode="CanResize">
 	<Window.Resources>
 		<ResourceDictionary>

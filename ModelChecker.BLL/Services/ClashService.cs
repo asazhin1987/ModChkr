@@ -35,8 +35,9 @@ namespace ModelChecker.BLL.Services
 		{
 			try
 			{
-				return from t1 in db.Constructions.GetAll().AsNoTracking().ToList()
-					   select new ConstructionDTO().Map(t1);
+				return db.Constructions.GetAll().AsNoTracking().ToList()
+					.Select(x => new ConstructionDTO().Map(x));
+				
 			}
 			catch (Exception ex)
 			{
@@ -55,9 +56,9 @@ namespace ModelChecker.BLL.Services
 				if (item != null)
 				{
 					item.Odate = odate;
-					//Task t = db.Constructions.UpdateAsync(item);
-					//t.Wait();
-					db.Constructions.UpdateNotDetectAsync(item).GetAwaiter().GetResult();
+					Task t = db.Constructions.UpdateAsync(item);
+					t.Wait();
+					//db.Constructions.UpdateNotDetectAsync(item).GetAwaiter().GetResult();
 				}
 			}
 			catch { }
@@ -78,9 +79,9 @@ namespace ModelChecker.BLL.Services
 				if (_item == null)
 				{
 					_item = new RevitModel() { Name = item.Name };
-					//Task t = db.RevitModels.CreateAsync(_item);
-					//t.Wait();
-					db.RevitModels.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
+					Task t = db.RevitModels.CreateAsync(_item);
+					t.Wait();
+					//db.RevitModels.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
 				}
 				item.Id = _item.Id;
 				return item;
@@ -106,9 +107,9 @@ namespace ModelChecker.BLL.Services
 				if (_item == null)
 				{
 					_item = new RevitCategory() { Name = item.Name };
-					//Task t = db.RevitCategories.CreateAsync(_item);
-					//t.Wait();
-					db.RevitCategories.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
+					Task t = db.RevitCategories.CreateAsync(_item);
+					t.Wait();
+					//db.RevitCategories.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
 				}
 				item.Id = _item.Id;
 				return item;
@@ -148,16 +149,16 @@ namespace ModelChecker.BLL.Services
 						RightName = chs[1],
 						Odate = item.Date
 					};
-					//Task t = db.FullChecks.CreateAsync(_item);
-					//t.Wait();
-					db.FullChecks.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
+					Task t = db.FullChecks.CreateAsync(_item);
+					t.Wait();
+					//db.FullChecks.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
 				}
 				else
 				{
 					_item.Odate = item.Date;
-					//Task t = db.FullChecks.UpdateAsync(_item);
-					//t.Wait();
-					db.FullChecks.UpdateNotDetectAsync(_item).GetAwaiter().GetResult();
+					Task t = db.FullChecks.UpdateAsync(_item);
+					t.Wait();
+					//db.FullChecks.UpdateNotDetectAsync(_item).GetAwaiter().GetResult();
 				}
 				item.Id = _item.Id;
 				return item;
@@ -192,9 +193,9 @@ namespace ModelChecker.BLL.Services
 						RevitId = item.RevitId,
 						Level = item.Level
 					};
-					db.RevitElements.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
-					//Task t = db.RevitElements.CreateAsync(_item);
-					//t.Wait();
+					//db.RevitElements.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
+					Task t = db.RevitElements.CreateAsync(_item);
+					t.Wait();
 				}
 				item.Id = _item.Id;
 				return item;
@@ -240,9 +241,9 @@ namespace ModelChecker.BLL.Services
 					_item.Odate = odate;
 					_item.Act = "D";
 					_item.ClashStatusId = 5;
-					//Task t = db.Clashes.UpdateAsync(_item);
-					//t.Wait();
-					db.Clashes.UpdateNotDetectAsync(_item).GetAwaiter().GetResult();
+					Task t = db.Clashes.UpdateAsync(_item);
+					t.Wait();
+					//db.Clashes.UpdateNotDetectAsync(_item).GetAwaiter().GetResult();
 				}
 			}
 			catch (Exception ex)
@@ -289,9 +290,9 @@ namespace ModelChecker.BLL.Services
 						Act = "I",
 						Odate = item.Odate
 					};
-					db.Clashes.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
-					//Task t = db.Clashes.CreateAsync(_item);
-					//t.Wait();
+					//db.Clashes.CreateNotDetectAsync(_item).GetAwaiter().GetResult();
+					Task t = db.Clashes.CreateAsync(_item);
+					t.Wait();
 				}
 				else
 				{
@@ -307,9 +308,9 @@ namespace ModelChecker.BLL.Services
 					}
 					_item.Act = "U";
 					_item.Odate = item.Odate;
-					db.Clashes.UpdateNotDetectAsync(_item).GetAwaiter().GetResult();
-					//Task ut = db.Clashes.UpdateAsync(_item);
-					//ut.Wait();
+					//db.Clashes.UpdateNotDetectAsync(_item).GetAwaiter().GetResult();
+					Task ut = db.Clashes.UpdateAsync(_item);
+					ut.Wait();
 				}
 				return true;
 			}
