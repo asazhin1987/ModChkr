@@ -54,8 +54,8 @@ namespace ModelChecker
 			try
 			{
 				SetService(CheckHost());
-				//if (src.CheckLicense() == false)
-				//	throw new Exception("Лицензия недействительна");
+				if (src.CheckLicense() == false)
+					throw new Exception("Лицензия недействительна");
 				determ = src.GetDelimiter();
 				//создание модели
 				model = new ClashMasterViewModel(
